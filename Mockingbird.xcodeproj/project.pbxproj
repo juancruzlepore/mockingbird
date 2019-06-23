@@ -1,0 +1,494 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6580ED6D22BFDFD4005D4E71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6580ED6C22BFDFD4005D4E71 /* AppDelegate.swift */; };
+		6580ED6F22BFDFD4005D4E71 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6580ED6E22BFDFD4005D4E71 /* ContentView.swift */; };
+		6580ED7222BFDFD4005D4E71 /* Mockingbird.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6580ED7022BFDFD4005D4E71 /* Mockingbird.xcdatamodeld */; };
+		6580ED7422BFDFD7005D4E71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6580ED7322BFDFD7005D4E71 /* Assets.xcassets */; };
+		6580ED7722BFDFD7005D4E71 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6580ED7622BFDFD7005D4E71 /* Preview Assets.xcassets */; };
+		6580ED7A22BFDFD7005D4E71 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6580ED7822BFDFD7005D4E71 /* Main.storyboard */; };
+		6580ED8622BFDFD7005D4E71 /* MockingbirdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6580ED8522BFDFD7005D4E71 /* MockingbirdTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6580ED8222BFDFD7005D4E71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6580ED6122BFDFD4005D4E71 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6580ED6822BFDFD4005D4E71;
+			remoteInfo = Mockingbird;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6580ED6922BFDFD4005D4E71 /* Mockingbird.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mockingbird.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6580ED6C22BFDFD4005D4E71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6580ED6E22BFDFD4005D4E71 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6580ED7122BFDFD4005D4E71 /* Mockingbird.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mockingbird.xcdatamodel; sourceTree = "<group>"; };
+		6580ED7322BFDFD7005D4E71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6580ED7622BFDFD7005D4E71 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6580ED7922BFDFD7005D4E71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6580ED7B22BFDFD7005D4E71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6580ED7C22BFDFD7005D4E71 /* Mockingbird.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mockingbird.entitlements; sourceTree = "<group>"; };
+		6580ED8122BFDFD7005D4E71 /* MockingbirdTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MockingbirdTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6580ED8522BFDFD7005D4E71 /* MockingbirdTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockingbirdTests.swift; sourceTree = "<group>"; };
+		6580ED8722BFDFD7005D4E71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6580ED6622BFDFD4005D4E71 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6580ED7E22BFDFD7005D4E71 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6580ED6022BFDFD4005D4E71 = {
+			isa = PBXGroup;
+			children = (
+				6580ED6B22BFDFD4005D4E71 /* Mockingbird */,
+				6580ED8422BFDFD7005D4E71 /* MockingbirdTests */,
+				6580ED6A22BFDFD4005D4E71 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6580ED6A22BFDFD4005D4E71 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6580ED6922BFDFD4005D4E71 /* Mockingbird.app */,
+				6580ED8122BFDFD7005D4E71 /* MockingbirdTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6580ED6B22BFDFD4005D4E71 /* Mockingbird */ = {
+			isa = PBXGroup;
+			children = (
+				6580ED6C22BFDFD4005D4E71 /* AppDelegate.swift */,
+				6580ED6E22BFDFD4005D4E71 /* ContentView.swift */,
+				6580ED7322BFDFD7005D4E71 /* Assets.xcassets */,
+				6580ED7822BFDFD7005D4E71 /* Main.storyboard */,
+				6580ED7B22BFDFD7005D4E71 /* Info.plist */,
+				6580ED7C22BFDFD7005D4E71 /* Mockingbird.entitlements */,
+				6580ED7022BFDFD4005D4E71 /* Mockingbird.xcdatamodeld */,
+				6580ED7522BFDFD7005D4E71 /* Preview Content */,
+			);
+			path = Mockingbird;
+			sourceTree = "<group>";
+		};
+		6580ED7522BFDFD7005D4E71 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				6580ED7622BFDFD7005D4E71 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6580ED8422BFDFD7005D4E71 /* MockingbirdTests */ = {
+			isa = PBXGroup;
+			children = (
+				6580ED8522BFDFD7005D4E71 /* MockingbirdTests.swift */,
+				6580ED8722BFDFD7005D4E71 /* Info.plist */,
+			);
+			path = MockingbirdTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6580ED6822BFDFD4005D4E71 /* Mockingbird */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6580ED8A22BFDFD7005D4E71 /* Build configuration list for PBXNativeTarget "Mockingbird" */;
+			buildPhases = (
+				6580ED6522BFDFD4005D4E71 /* Sources */,
+				6580ED6622BFDFD4005D4E71 /* Frameworks */,
+				6580ED6722BFDFD4005D4E71 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Mockingbird;
+			productName = Mockingbird;
+			productReference = 6580ED6922BFDFD4005D4E71 /* Mockingbird.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6580ED8022BFDFD7005D4E71 /* MockingbirdTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6580ED8D22BFDFD7005D4E71 /* Build configuration list for PBXNativeTarget "MockingbirdTests" */;
+			buildPhases = (
+				6580ED7D22BFDFD7005D4E71 /* Sources */,
+				6580ED7E22BFDFD7005D4E71 /* Frameworks */,
+				6580ED7F22BFDFD7005D4E71 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6580ED8322BFDFD7005D4E71 /* PBXTargetDependency */,
+			);
+			name = MockingbirdTests;
+			productName = MockingbirdTests;
+			productReference = 6580ED8122BFDFD7005D4E71 /* MockingbirdTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6580ED6122BFDFD4005D4E71 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+				ORGANIZATIONNAME = "Juan Cruz Lepore";
+				TargetAttributes = {
+					6580ED6822BFDFD4005D4E71 = {
+						CreatedOnToolsVersion = 11.0;
+					};
+					6580ED8022BFDFD7005D4E71 = {
+						CreatedOnToolsVersion = 11.0;
+						TestTargetID = 6580ED6822BFDFD4005D4E71;
+					};
+				};
+			};
+			buildConfigurationList = 6580ED6422BFDFD4005D4E71 /* Build configuration list for PBXProject "Mockingbird" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6580ED6022BFDFD4005D4E71;
+			productRefGroup = 6580ED6A22BFDFD4005D4E71 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6580ED6822BFDFD4005D4E71 /* Mockingbird */,
+				6580ED8022BFDFD7005D4E71 /* MockingbirdTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6580ED6722BFDFD4005D4E71 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6580ED7A22BFDFD7005D4E71 /* Main.storyboard in Resources */,
+				6580ED7722BFDFD7005D4E71 /* Preview Assets.xcassets in Resources */,
+				6580ED7422BFDFD7005D4E71 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6580ED7F22BFDFD7005D4E71 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6580ED6522BFDFD4005D4E71 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6580ED6F22BFDFD4005D4E71 /* ContentView.swift in Sources */,
+				6580ED6D22BFDFD4005D4E71 /* AppDelegate.swift in Sources */,
+				6580ED7222BFDFD4005D4E71 /* Mockingbird.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6580ED7D22BFDFD7005D4E71 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6580ED8622BFDFD7005D4E71 /* MockingbirdTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6580ED8322BFDFD7005D4E71 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6580ED6822BFDFD4005D4E71 /* Mockingbird */;
+			targetProxy = 6580ED8222BFDFD7005D4E71 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6580ED7822BFDFD7005D4E71 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6580ED7922BFDFD7005D4E71 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6580ED8822BFDFD7005D4E71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6580ED8922BFDFD7005D4E71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		6580ED8B22BFDFD7005D4E71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Mockingbird/Mockingbird.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "Mockingbird/Preview\\ Content";
+				DEVELOPMENT_TEAM = PLY5RP22RG;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Mockingbird/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jcl.Mockingbird;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6580ED8C22BFDFD7005D4E71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Mockingbird/Mockingbird.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "Mockingbird/Preview\\ Content";
+				DEVELOPMENT_TEAM = PLY5RP22RG;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Mockingbird/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jcl.Mockingbird;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		6580ED8E22BFDFD7005D4E71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = PLY5RP22RG;
+				INFOPLIST_FILE = MockingbirdTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jcl.MockingbirdTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mockingbird.app/Contents/MacOS/Mockingbird";
+			};
+			name = Debug;
+		};
+		6580ED8F22BFDFD7005D4E71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = PLY5RP22RG;
+				INFOPLIST_FILE = MockingbirdTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jcl.MockingbirdTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mockingbird.app/Contents/MacOS/Mockingbird";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6580ED6422BFDFD4005D4E71 /* Build configuration list for PBXProject "Mockingbird" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6580ED8822BFDFD7005D4E71 /* Debug */,
+				6580ED8922BFDFD7005D4E71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6580ED8A22BFDFD7005D4E71 /* Build configuration list for PBXNativeTarget "Mockingbird" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6580ED8B22BFDFD7005D4E71 /* Debug */,
+				6580ED8C22BFDFD7005D4E71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6580ED8D22BFDFD7005D4E71 /* Build configuration list for PBXNativeTarget "MockingbirdTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6580ED8E22BFDFD7005D4E71 /* Debug */,
+				6580ED8F22BFDFD7005D4E71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6580ED7022BFDFD4005D4E71 /* Mockingbird.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6580ED7122BFDFD4005D4E71 /* Mockingbird.xcdatamodel */,
+			);
+			currentVersion = 6580ED7122BFDFD4005D4E71 /* Mockingbird.xcdatamodel */;
+			path = Mockingbird.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 6580ED6122BFDFD4005D4E71 /* Project object */;
+}
