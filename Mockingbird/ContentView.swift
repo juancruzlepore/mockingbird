@@ -64,9 +64,9 @@ struct TodayScoreView: View {
         VStack {
             if historyByDay.count > 1 {
                 if (historyByDay[1].score >= today.score) {
-                    Text(String(format: "%.1f ▾", today.score)).bold().font(Font.largeTitle).color(Color.red)
+                    Text(String(format: "%.1f ▾", today.score)).bold().font(Font.largeTitle).foregroundColor(Color.red)
                 } else {
-                    Text(String(format: "%.1f ▴", today.score)).bold().font(Font.largeTitle).color(Color.green)
+                    Text(String(format: "%.1f ▴", today.score)).bold().font(Font.largeTitle).foregroundColor(Color.green)
                 }
             } else {
                     Text(String(format: "%.1f", today.score)).bold().font(Font.largeTitle)
@@ -83,7 +83,7 @@ struct AddSeriesView: View {
 
     var smallPadding = EdgeInsets(top: smallPaddingVal, leading: smallPaddingVal, bottom: smallPaddingVal, trailing: smallPaddingVal)
 
-    @State var reps: Int = repsDefault
+    @State var reps = repsDefault
     @State var selectedWorkout = 1
     @State var lastRepsAdded: Int? = nil
     @ObjectBinding var wom: WorkOutsManager
@@ -101,7 +101,7 @@ struct AddSeriesView: View {
                 }
             }
             HStack {
-                Text(String(format: "Repetitions: %d", self.reps))
+                Text(String(format: "Repetitions: %d", self.reps as Int))
                 Button(action: { self.addToReps(amount: 1) }) {
                     Text("+1")
                 }

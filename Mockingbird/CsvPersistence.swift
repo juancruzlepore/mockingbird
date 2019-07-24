@@ -39,7 +39,16 @@ class CsvPersistence: Persistence {
     
     let workOutHistoryFile = getDocumentsDirectory().appendingPathComponent("workouts.txt")
     let workOutsDescriptionsFile = getDocumentsDirectory().appendingPathComponent("workoutsDescriptions.txt")
+        
     
+//    init() {
+//        let exists: Bool = self.fileExists(fileName: "workouts.txt")
+//        if(exists){
+//            os_log("file does not exists")
+//        }else{
+//            os_log("file exists :D!")
+//        }
+//    }
 //    func getWorkOutsDescriptions() -> [WorkOut] {
 //        do {
 //            let history = try String(contentsOf: workOutHistoryFile)
@@ -61,6 +70,7 @@ class CsvPersistence: Persistence {
             let history = try String(contentsOf: workOutHistoryFile)
             os_log("Workout history found")
             let lines = history.components(separatedBy: "\n")
+            os_log("Workout history contains %d lines", lines.count)
             os_log("Workout history size: %d", lines.count)
             return lines
         } catch {
@@ -98,4 +108,11 @@ class CsvPersistence: Persistence {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask)
         return paths[0]
     }
+    
+//    private func fileExists(fileName: String) -> Bool{
+////        let url:URL = CsvPersistence.getDocumentsDirectory()
+//        FileManager.
+//        os_log("%b", FileManager.default.fileExists(atPath: "workouts.txt"))
+//        return true
+//    }
 }

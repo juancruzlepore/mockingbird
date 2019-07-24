@@ -12,7 +12,9 @@ import Combine
 import os.log
 
 class WorkOutsManager: BindableObject, HistoryProvider {
-    typealias PublisherType = PassthroughSubject<Void, Never>
+    var willChange = PassthroughSubject<Void, Never>()
+    
+//    typealias PublisherType = PassthroughSubject<Void, Never>
     
     public static let instance = WorkOutsManager()
     
@@ -26,7 +28,7 @@ class WorkOutsManager: BindableObject, HistoryProvider {
         let map = WorkOutDefinitions.descriptions.reduce(into: [String: WorkOut]()) {
             $0[$1.name] = $1
         }
-        os_log("workout desriptions found: %d", map.count)
+        os_log("Workout descriptions found: %d", map.count)
         return map
     }
     
@@ -36,7 +38,6 @@ class WorkOutsManager: BindableObject, HistoryProvider {
     }
     
     lazy var streaks: StreaksManager = StreaksManager(historyProvider: self) // MARK: reference loop?
-    var didChange = PublisherType()
     var persistence: Persistence?
     var workOutsMap: [String: WorkOut]
     var workOutsList: [WorkOut] {
@@ -64,6 +65,10 @@ class WorkOutsManager: BindableObject, HistoryProvider {
             return false
         }
         persistence!.getWorkOutHistory().forEach { series in
+            if(series==""){
+                os_log("History line is nil")
+                return 
+            }
             let parts = series.components(separatedBy: ",").map({ $0.trim() })
             let currentWorkOut = workOutsMap[parts[0]]!
             let date = DateUtils.getDate(dateString: parts[2])
@@ -87,7 +92,7 @@ class WorkOutsManager: BindableObject, HistoryProvider {
     public func addSeries(series: Series) {
         self.persistence?.addSeriesToHistory(series: series.toString())
         self.history.append(series)
-        self.didChange.send()
+        self.willChange.send()
     }
     
     private func mapByDate(map: [Series]) -> [Date:DaySeries]{

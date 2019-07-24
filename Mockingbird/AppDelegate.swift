@@ -24,7 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
-        os_log("application Did Finish Launching.")
+        os_log("Application Did Finish Launching.")
         let wom = WorkOutsManager.instance
         wom.setPersistence(persistence: CsvPersistence()).update()
 
