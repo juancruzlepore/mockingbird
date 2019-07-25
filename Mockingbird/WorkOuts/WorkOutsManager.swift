@@ -52,6 +52,7 @@ class WorkOutsManager: BindableObject, HistoryProvider {
     var historyByDay: [DaySeries] {
         let historyMap = self.mapByDate(map: self.history)
         let history = [DaySeries](historyMap.values)
+        os_log("historyByDay entries : %d", history.count)
         return history.sorted {$0.date > $1.date}
     }
     

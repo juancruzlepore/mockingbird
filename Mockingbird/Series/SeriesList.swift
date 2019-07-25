@@ -11,9 +11,8 @@ import SwiftUI
 import Combine
 
 class SeriesList: BindableObject, Identifiable {
-    var willChange = PassthroughSubject<Void, Never>()
     
-//    typealias PublisherType = PassthroughSubject<Void, Never>
+    var willChange = PassthroughSubject<Void, Never>()
     
     private static var counter: Int = 0
     private static func nextId() -> Int {
@@ -23,10 +22,9 @@ class SeriesList: BindableObject, Identifiable {
     
     public let id: Int
     
-    var didChange = PublisherType()
     var series = [Series]() {
         didSet {
-            didChange.send()
+            willChange.send()
         }
     }
     var totalReps: Int {

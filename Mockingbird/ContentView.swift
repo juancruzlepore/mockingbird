@@ -22,18 +22,22 @@ struct ContentView : View {
                 ForEach(wom.historyByDay) { (day: DaySeries) in
                     HStack{
                         DayView(daySeries: day)
-                        if (day.date == self.today()){
+                        if (day.date == self.today()) {
                             TodayScoreView(historyByDay: self.wom.historyByDay, today: day)
                         } else {
                             Text(String(format: "%.1f", day.score)).bold().font(Font.largeTitle)
                         }
                     }.padding(EdgeInsets(top: CGFloat(0.0), leading: CGFloat(-30.0), bottom: CGFloat(0.0), trailing: CGFloat(5.0)))
                 }
-            }.padding(EdgeInsets(top: CGFloat(0.0), leading: CGFloat(1.0), bottom: CGFloat(0.0), trailing: CGFloat(1.0)))
+            }.padding(EdgeInsets(top: CGFloat(0.0), leading: CGFloat(1.0), bottom: CGFloat(0.0), trailing: CGFloat(2.0)))
             VStack{
                 StreaksView(streaks: wom.streaks)
-                AddSeriesView(mostRecentDay: self.wom.historyByDay[0], wom: wom)
-            }
+                if (self.wom.historyByDay.count == 0) {
+                    AddSeriesView(mostRecentDay: nil, wom: wom)
+                } else {
+                    AddSeriesView(mostRecentDay: self.wom.historyByDay[0], wom: wom)
+                }
+            }.padding(EdgeInsets(top: CGFloat(0.0), leading: CGFloat(1.0), bottom: CGFloat(0.0), trailing: CGFloat(20.0)))
         }
     }
 }
@@ -45,14 +49,22 @@ struct DayView: View {
     var body: some View {
         VStack {
             Text(daySeries.dateString)
-            ForEach(daySeries.series) { (s: SeriesList) in
-                HStack{
-                    Text(String(s.totalReps)).padding(self.zeroPadding)
-                    Text(String(s.series[0].type.name)).padding(self.zeroPadding)
-                }.padding(self.noSpaceList)
-            }
-            }.frame(width: 250, height: 60, alignment: .center).foregroundColor(Color.init(red: 0.5, green: 0.5, blue: 0.5))
-            .padding(EdgeInsets(top: CGFloat(0.1), leading: CGFloat(0.0), bottom: CGFloat(0.1), trailing: CGFloat(0.0)))
+            List {
+                ForEach(daySeries.series.sorted {
+                    if ($0.totalReps != $1.totalReps){
+                        return $0.totalReps > $1.totalReps
+                    } else {
+                        return $0.series[0].type.name < $1.series[0].type.name
+                    }
+                    }) { (s: SeriesList) in
+                    HStack{
+                        Text(String(s.totalReps)).padding(self.zeroPadding)
+                        Text(String(s.series[0].type.name)).padding(self.zeroPadding)
+                    }.padding(self.noSpaceList)
+                }
+                }.frame(width: 250, height: 60, alignment: .center).foregroundColor(Color.init(red: 0.5, green: 0.5, blue: 0.5))
+                .padding(EdgeInsets(top: CGFloat(0.1), leading: CGFloat(100.0), bottom: CGFloat(0.1), trailing: CGFloat(2.0)))
+        }
     }
 }
 
@@ -79,7 +91,7 @@ struct AddSeriesView: View {
     static let smallPaddingVal: CGFloat = 5.0
     static let repsDefault: Int = 10
 
-    let mostRecentDay: DaySeries
+    let mostRecentDay: DaySeries?
 
     var smallPadding = EdgeInsets(top: smallPaddingVal, leading: smallPaddingVal, bottom: smallPaddingVal, trailing: smallPaddingVal)
 
@@ -125,8 +137,8 @@ struct AddSeriesView: View {
                 self.lastRepsAdded = self.reps
                 self.reps = AddSeriesView.repsDefault
             }) {
-                if (self.mostRecentDay.date == DateUtils.today()){
-                    Text(String(format: " Add (today → %.1f) ", mostRecentDay.score + Series(type: WorkOutDefinitions.getById(ID: self.selectedWorkout)!, reps: self.reps, date: DateUtils.today()).score))
+                if (self.mostRecentDay != nil && self.mostRecentDay!.date == DateUtils.today()){
+                    Text(String(format: " Add (today → %.1f) ", mostRecentDay!.score + Series(type: WorkOutDefinitions.getById(ID: self.selectedWorkout)!, reps: self.reps, date: DateUtils.today()).score))
                 } else {
                     Text(String(format: " Add (today → %.1f) ", Series(type: WorkOutDefinitions.getById(ID: self.selectedWorkout)!, reps: self.reps, date: DateUtils.today()).score))
                 }
