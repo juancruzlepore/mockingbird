@@ -32,10 +32,12 @@ class WorkOut: Hashable, Identifiable {
     }
     
     public let values: [MuscleGroup:Float]
+    public let movementType: MovementType
     
-    init(name: String, values: [MuscleGroup:Float]) {
+    init(name: String, values: [MuscleGroup:Float], movementType: MovementType) {
         self.name = name
         self.values = values
+        self.movementType = movementType
         self.id = WorkOut.nextId()
     }
     

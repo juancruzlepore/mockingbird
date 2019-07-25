@@ -45,4 +45,13 @@ final class DateUtils {
     static func today() -> Date {
         return Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
     }
+    
+    static func addDays(amount: Int, to date: Date) -> Date {
+        return Calendar.current.date(byAdding: .day, value: amount, to: date)!
+    }
+    
+    static func addDaysToToday(amount: Int) -> Date {
+        return DateUtils.addDays(amount: amount, to: DateUtils.today())
+    }
+        
 }
