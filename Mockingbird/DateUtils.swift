@@ -53,5 +53,9 @@ final class DateUtils {
     static func addDaysToToday(amount: Int) -> Date {
         return DateUtils.addDays(amount: amount, to: DateUtils.today())
     }
-        
+    
+    static func addWeeksToToday(amount: Int) -> Date {
+        return DateUtils.addDays(amount: amount * 7, to: DateUtils.today())
+    }
+
 }

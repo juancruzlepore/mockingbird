@@ -42,4 +42,13 @@ class StreaksManager {
         return curStreak
     }
     
+    func getWeekOverWeekRatio() -> Float? {
+        let lastWeekScore = Utils.getLastWeekScore(from: historyProvider.history)
+        let penultimateWeekScore = Utils.getPenultimateWeekScore(from: historyProvider.history)
+        if (lastWeekScore == 0 || penultimateWeekScore == 0) {
+            return nil
+        }
+        return lastWeekScore / penultimateWeekScore
+    }
+    
 }

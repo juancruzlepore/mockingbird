@@ -16,6 +16,10 @@ class Utils {
     }
     
     static func getLastWeekScore(from series: [Series]) -> Float {
-        return Utils.getScore(from: series, after: DateUtils.addDaysToToday(amount: 7), before: DateUtils.today())
+        return Utils.getScore(from: series, after: DateUtils.addWeeksToToday(amount: -1), before: DateUtils.today())
+    }
+    
+    static func getPenultimateWeekScore(from series: [Series]) -> Float {
+        return Utils.getScore(from: series, after: DateUtils.addWeeksToToday(amount: -2), before: DateUtils.addWeeksToToday(amount: -1))
     }
 }

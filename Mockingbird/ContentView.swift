@@ -148,18 +148,6 @@ struct AddSeriesView: View {
     }
 }
 
-
-struct StreaksView: View {
-    let streaks: StreaksManager
-    
-    var body: some View {
-        VStack{
-            Text("Streak").font(Font.title)
-            Text(String(format: "Current streak: %d", streaks.getCurrentStreak()))
-        }
-    }
-}
-
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
