@@ -62,8 +62,8 @@ struct DayView: View {
                         Text(String(s.series[0].type.name)).padding(self.zeroPadding)
                     }.padding(self.noSpaceList)
                 }
-                }.frame(width: 250, height: 60, alignment: .center).foregroundColor(Color.init(red: 0.5, green: 0.5, blue: 0.5))
-                .padding(EdgeInsets(top: CGFloat(0.1), leading: CGFloat(100.0), bottom: CGFloat(0.1), trailing: CGFloat(2.0)))
+            }.frame(width: 250, height: 60, alignment: .center).foregroundColor(Color.init(red: 0.5, green: 0.5, blue: 0.5))
+                .padding(EdgeInsets(top: 0, leading: 100, bottom: 0, trailing: 2))
         }
     }
 }
