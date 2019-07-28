@@ -61,9 +61,10 @@ class WorkOutsManager: BindableObject, HistoryProvider {
         return self
     }
     
-    public func update() -> Bool {
-        if persistence == nil{
-            return false
+    public func update() {
+        assert(persistence != nil)
+        if(persistence == nil){
+            return
         }
         persistence!.getWorkOutHistory().forEach { series in
             if(series==""){
@@ -79,8 +80,7 @@ class WorkOutsManager: BindableObject, HistoryProvider {
             }
             history.append(Series(type: currentWorkOut, reps: Int(parts[1]) ?? 0, date: date!))
         }
-        
-        return true
+        return
     }
     
     public func getHistoryByDay(where: (Series) -> Bool) -> [DaySeries] {
