@@ -17,15 +17,15 @@ enum Period: Int {
     case CUSTOM = -1
 }
 
+/// Class that encapsulates how often one should be working out, mainly to calculate the current streak
 class Frequency {
     public let period: Period
     public let timesInPeriod: Int
     public let calendarPeriod: Bool;
     
-    // calendarPeriod means that we are not using a sliding window to do the check. For example,
-    // if someone works out 3 times a week, one week on Mon, Tue, and Wed, and the next one on
-    // Fri, Sat, un Sun, with a sliding window it would have been an entire week without workouts,
-    // but with calendar week it would be ok.
+    /// - Parameter period: period of time for the routine to be repeated
+    /// - Parameter timesInPeriod: number of days in the period
+    /// - Parameter calendarPeriod: calendarPeriod means that we are not using a sliding window to do the check. For example, if someone works out 3 times a week, one week on Mon, Tue, and Wed, and the next one on Fri, Sat, un Sun, with a sliding window it would have been an entire week without workouts, but with calendar week it would be ok.
     init(period: Period, timesInPeriod: Int, calendarPeriod: Bool = true){
         self.period = period
         self.timesInPeriod = timesInPeriod
@@ -37,10 +37,6 @@ class FrequencyWithCalendarPeriod: Frequency {
     
     let periodStart: Date
     
-    // calendarPeriod means that we are not using a sliding window to do the check. For example,
-    // if someone works out 3 times a week, one week on Mon, Tue, and Wed, and the next one on
-    // Fri, Sat, un Sun, with a sliding window it would have been an entire week without workouts,
-    // but with calendar week it would be ok.
     init(period: Period, timesInPeriod: Int, periodStart: Date){
         self.periodStart = periodStart
         super.init(period: period, timesInPeriod: timesInPeriod, calendarPeriod: true)
@@ -49,10 +45,6 @@ class FrequencyWithCalendarPeriod: Frequency {
 
 class FrequencyWithSlidingWindow: Frequency {
     
-    // calendarPeriod means that we are not using a sliding window to do the check. For example,
-    // if someone works out 3 times a week, one week on Mon, Tue, and Wed, and the next one on
-    // Fri, Sat, un Sun, with a sliding window it would have been an entire week without workouts,
-    // but with calendar week it would be ok.
     init(period: Period, timesInPeriod: Int){
         super.init(period: period, timesInPeriod: timesInPeriod, calendarPeriod: false)
     }
