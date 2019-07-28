@@ -8,6 +8,20 @@
 
 import Foundation
 
+extension Date {
+    static func +(left: Date, right: Day) -> Date {
+            return DateUtils.addDays(amount: right.number, to: left)
+        }
+        
+    static func +(left: Date, right: Week) -> Date {
+        return DateUtils.addDays(amount: right.number * 7, to: left)
+    }
+    
+    static func +(left: Date, right: Period) -> Date {
+        return DateUtils.addDays(amount: right.rawValue, to: left)
+    }
+}
+
 final class DateUtils {
     private let dateFormatterStore = DateFormatter()
     private let dateFormatterShow = DateFormatter()

@@ -47,7 +47,7 @@ class StreaksManager {
         case let freqWithCal as FrequencyWithCalendarPeriod:
             return getCurrentStreakWithCalendarPeriod(withFrequency: freqWithCal)
         case let freqWithSliding as FrequencyWithSlidingWindow:
-            return getCurrentStreakWithSlidingWindow(withFrequency: freqWithSliding)
+            return try getCurrentStreakWithSlidingWindow(withFrequency: freqWithSliding)
         default:
             throw UnexpectedFrequencyTypeError()
         }
@@ -55,7 +55,9 @@ class StreaksManager {
     
     private func getCurrentStreakWithCalendarPeriod(withFrequency freq: FrequencyWithCalendarPeriod) -> Int {
         assert(freq.calendarPeriod == true)
+        let periodDays = freq.period.rawValue
         let today = DateUtils.today()
+        
         let days = self.historyProvider.historyByDay
         if days.count <= 1 { return days.count }
         var curStreak = 1
@@ -73,9 +75,9 @@ class StreaksManager {
         return curStreak
     }
     
-    private func getCurrentStreakWithSlidingWindow(withFrequency freq: FrequencyWithSlidingWindow) -> Int {
+    private func getCurrentStreakWithSlidingWindow(withFrequency freq: FrequencyWithSlidingWindow) throws -> Int {
         assert(freq.calendarPeriod == false)
-        return 1 // FIXME: implement
+        throw UnexpectedFrequencyTypeError() // FIXME: implement
     }
     
     func getWeekOverWeekRatio() -> Float? {

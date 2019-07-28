@@ -8,8 +8,13 @@
 
 import Foundation
 
-enum Period {
-    case DAY, WEEK, FORTNITE, MONTH, YEAR, CUSTOM
+enum Period: Int {
+    case DAY = 1
+    case WEEK = 7
+    case FORTNITE = 14
+    case MONTH = 30
+    case YEAR = 365
+    case CUSTOM = -1
 }
 
 class Frequency {
@@ -30,11 +35,14 @@ class Frequency {
 
 class FrequencyWithCalendarPeriod: Frequency {
     
+    let periodStart: Date
+    
     // calendarPeriod means that we are not using a sliding window to do the check. For example,
     // if someone works out 3 times a week, one week on Mon, Tue, and Wed, and the next one on
     // Fri, Sat, un Sun, with a sliding window it would have been an entire week without workouts,
     // but with calendar week it would be ok.
-    init(period: Period, timesInPeriod: Int){
+    init(period: Period, timesInPeriod: Int, periodStart: Date){
+        self.periodStart = periodStart
         super.init(period: period, timesInPeriod: timesInPeriod, calendarPeriod: true)
     }
 }
