@@ -6,7 +6,6 @@
 //  Copyright © 2019 Juan Cruz Lepore. All rights reserved.
 //
 
-import Foundation
 import SwiftUI
 
 struct StreaksView: View {

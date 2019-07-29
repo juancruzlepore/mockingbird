@@ -87,67 +87,6 @@ struct TodayScoreView: View {
     }
 }
 
-struct AddSeriesView: View {
-    static let smallPaddingVal: CGFloat = 5.0
-    static let repsDefault: Int = 10
-
-    let mostRecentDay: DaySeries?
-
-    var smallPadding = EdgeInsets(top: smallPaddingVal, leading: smallPaddingVal, bottom: smallPaddingVal, trailing: smallPaddingVal)
-
-    @State var reps = repsDefault
-    @State var selectedWorkout = 1
-    @State var lastRepsAdded: Int? = nil
-    @ObjectBinding var wom: WorkOutsManager
-    
-    private func addToReps(amount: Int){
-        self.reps = max(1, self.reps + amount)
-    }
-
-    var body: some View {
-        VStack{
-            Text("Add workout").font(Font.title)
-            Picker(selection: $selectedWorkout, label: Text("Workout")) {
-                ForEach(self.wom.workOutsList) { (w: WorkOut) in
-                    Text(w.name).tag(w.id)
-                }
-            }
-            HStack {
-                Text(String(format: "Repetitions: %d", self.reps as Int))
-                Button(action: { self.addToReps(amount: 1) }) {
-                    Text("+1")
-                }
-                Button(action: { self.addToReps(amount: -1) }) {
-                    Text("-1")
-                }
-                Button(action: { self.addToReps(amount: 10) }) {
-                    Text("+10")
-                }
-                Button(action: { self.addToReps(amount: -10) }) {
-                    Text("-10")
-                }
-                if (self.lastRepsAdded != nil && self.lastRepsAdded != 10) {
-                    Button(action: { self.reps = self.lastRepsAdded! }) {
-                        Text(String(format: "✧ set to %d", self.lastRepsAdded!))
-                    }.background(Color(red: 0.4, green: 0.0, blue: 0.3))
-                }
-            }
-            Button(action: {
-                self.wom.addSeries(series: Series(type: WorkOutDefinitions.getById(ID: self.selectedWorkout)!, reps: self.reps, date: DateUtils.today()))
-                self.lastRepsAdded = self.reps
-                self.reps = AddSeriesView.repsDefault
-            }) {
-                if (self.mostRecentDay != nil && self.mostRecentDay!.date == DateUtils.today()){
-                    Text(String(format: " Add (today → %.1f) ", mostRecentDay!.score + Series(type: WorkOutDefinitions.getById(ID: self.selectedWorkout)!, reps: self.reps, date: DateUtils.today()).score))
-                } else {
-                    Text(String(format: " Add (today → %.1f) ", Series(type: WorkOutDefinitions.getById(ID: self.selectedWorkout)!, reps: self.reps, date: DateUtils.today()).score))
-                }
-                
-            }
-        }.padding(smallPadding)
-    }
-}
-
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {

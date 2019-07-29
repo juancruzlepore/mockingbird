@@ -35,6 +35,7 @@ class WorkOutsManager: BindableObject, HistoryProvider {
     private init(){
         self.workOutsMap = WorkOutsManager.genWorkOutsMap()
         self.history = []
+        self.frequentWorkOuts = SortedRecentSet(maxSize: 5)
     }
     
     lazy var streaks: StreaksManager = StreaksManager(historyProvider: self) // MARK: reference loop?
@@ -43,11 +44,16 @@ class WorkOutsManager: BindableObject, HistoryProvider {
     var workOutsList: [WorkOut] {
         ([WorkOut])(workOutsMap.values)
     }
+    var frequentWorkOuts: SortedRecentSet<WorkOut>
+    var frequentWorkOutsList: [WorkOut]{
+        frequentWorkOuts.getSortedList()
+    }
+    var infrequentWorkOutsList: [WorkOut] {
+        Array(Set(workOutsList).symmetricDifference(Set(frequentWorkOutsList)))
+    }
     var history: [Series]
     var score: Float32 {
-        get {
-            return history.reduce(0, {result, series in result + Float32(series.repetitions) * series.type.value})
-        }
+        history.reduce(0, {result, series in result + Float32(series.repetitions) * series.type.value})
     }
     var historyByDay: [DaySeries] {
         let historyMap = self.mapByDate(map: self.history)
@@ -94,6 +100,7 @@ class WorkOutsManager: BindableObject, HistoryProvider {
         self.persistence?.addSeriesToHistory(series: series.toString())
         self.history.append(series)
         self.willChange.send()
+        self.frequentWorkOuts.insert(elem: series.type)
     }
     
     private func mapByDate(map: [Series]) -> [Date:DaySeries]{

@@ -20,6 +20,8 @@
 		6542ABA422EDC93600EA910E /* UnsupportedPeriodTypeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6542ABA322EDC93600EA910E /* UnsupportedPeriodTypeError.swift */; };
 		6542ABA722EDCBFC00EA910E /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6542ABA622EDCBFC00EA910E /* Day.swift */; };
 		6542ABA922EDCD5C00EA910E /* Week.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6542ABA822EDCD5C00EA910E /* Week.swift */; };
+		6542ABAB22EF8BE400EA910E /* AddSeriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6542ABAA22EF8BE400EA910E /* AddSeriesView.swift */; };
+		6542ABAE22EF927900EA910E /* SortedRecentSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6542ABAD22EF927900EA910E /* SortedRecentSet.swift */; };
 		6542B32922CE85950060763E /* SingleWorkOutSeriesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6542B32822CE85950060763E /* SingleWorkOutSeriesList.swift */; };
 		6542B32B22CE8D280060763E /* MuscleGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6542B32A22CE8D280060763E /* MuscleGroup.swift */; };
 		6542B32D22CEB8430060763E /* MovementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6542B32C22CEB8430060763E /* MovementType.swift */; };
@@ -63,6 +65,8 @@
 		6542ABA322EDC93600EA910E /* UnsupportedPeriodTypeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UnsupportedPeriodTypeError.swift; path = ../../../../../../System/Volumes/Data/Users/jcl/XCodeProjects/Mockingbird/Mockingbird/Errors/UnsupportedPeriodTypeError.swift; sourceTree = "<group>"; };
 		6542ABA622EDCBFC00EA910E /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Day.swift; path = ../../../../../../System/Volumes/Data/Users/jcl/XCodeProjects/Mockingbird/Mockingbird/Time/Day.swift; sourceTree = "<group>"; };
 		6542ABA822EDCD5C00EA910E /* Week.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Week.swift; path = ../../../../../../System/Volumes/Data/Users/jcl/XCodeProjects/Mockingbird/Mockingbird/Time/Week.swift; sourceTree = "<group>"; };
+		6542ABAA22EF8BE400EA910E /* AddSeriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddSeriesView.swift; path = ../../../../../../System/Volumes/Data/Users/jcl/XCodeProjects/Mockingbird/Mockingbird/Views/AddSeriesView.swift; sourceTree = "<group>"; };
+		6542ABAD22EF927900EA910E /* SortedRecentSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SortedRecentSet.swift; path = ../../../../../../System/Volumes/Data/Users/jcl/XCodeProjects/Mockingbird/Mockingbird/DataStructures/SortedRecentSet.swift; sourceTree = "<group>"; };
 		6542B32822CE85950060763E /* SingleWorkOutSeriesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleWorkOutSeriesList.swift; sourceTree = "<group>"; };
 		6542B32A22CE8D280060763E /* MuscleGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleGroup.swift; sourceTree = "<group>"; };
 		6542B32C22CEB8430060763E /* MovementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementType.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				6542AB9C22EC785F00EA910E /* StreaksView.swift */,
+				6542ABAA22EF8BE400EA910E /* AddSeriesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -171,6 +176,14 @@
 				6542ABA822EDCD5C00EA910E /* Week.swift */,
 			);
 			path = Time;
+			sourceTree = "<group>";
+		};
+		6542ABAC22EF922700EA910E /* DataStructures */ = {
+			isa = PBXGroup;
+			children = (
+				6542ABAD22EF927900EA910E /* SortedRecentSet.swift */,
+			);
+			path = DataStructures;
 			sourceTree = "<group>";
 		};
 		6580ED6022BFDFD4005D4E71 = {
@@ -195,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				6580ED6C22BFDFD4005D4E71 /* AppDelegate.swift */,
+				6542ABAC22EF922700EA910E /* DataStructures */,
 				6542ABA022EDAB5B00EA910E /* Errors */,
 				6580ED6E22BFDFD4005D4E71 /* ContentView.swift */,
 				6542AB9B22EC782F00EA910E /* Views */,
@@ -340,6 +354,7 @@
 				6542ABA722EDCBFC00EA910E /* Day.swift in Sources */,
 				6542B32D22CEB8430060763E /* MovementType.swift in Sources */,
 				6542B32B22CE8D280060763E /* MuscleGroup.swift in Sources */,
+				6542ABAB22EF8BE400EA910E /* AddSeriesView.swift in Sources */,
 				6580ED6F22BFDFD4005D4E71 /* ContentView.swift in Sources */,
 				656B493822CA9FA9001A5B0A /* WorkOutsManager.swift in Sources */,
 				6542ABA922EDCD5C00EA910E /* Week.swift in Sources */,
@@ -352,6 +367,7 @@
 				6542ABA422EDC93600EA910E /* UnsupportedPeriodTypeError.swift in Sources */,
 				656B493622CA90CD001A5B0A /* WorkOut.swift in Sources */,
 				65F87FB922D14F880076BD40 /* DateUtils.swift in Sources */,
+				6542ABAE22EF927900EA910E /* SortedRecentSet.swift in Sources */,
 				6542ABA222EDAB8500EA910E /* UnexpectedFrequencyTypeError.swift in Sources */,
 				653BD57322D1024800FBFB3A /* UserSettings.swift in Sources */,
 				653BD57722D1305B00FBFB3A /* WorkOutDefinitions.swift in Sources */,
