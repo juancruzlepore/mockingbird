@@ -8,13 +8,45 @@
 
 import Foundation
 
-enum Period: Int {
-    case DAY = 1
-    case WEEK = 7
-    case FORTNITE = 14
-    case MONTH = 30
-    case YEAR = 365
-    case CUSTOM = -1
+class PeriodData: Equatable, ExpressibleByStringLiteral {
+    
+    let days: UInt
+    let singularName: String
+    let pluralName: String
+    
+    public static func == (lhs: PeriodData, rhs: PeriodData) -> Bool {
+        return (lhs.days == rhs.days && lhs.singularName == rhs.singularName)
+    }
+    
+    public required init(stringLiteral value: String) {
+        let components = value.components(separatedBy: ",")
+        if components.count == 3 {
+            self.days = UInt(components[0])!
+            self.singularName = components[1]
+            self.pluralName = components[2]
+        } else {
+            self.days = 1
+            self.singularName = "ERROR"
+            self.pluralName = "ERROR"
+        }
+        
+    }
+    
+    init(days: UInt, singularName: String, pluralName: String){
+        self.days = days
+        self.singularName = singularName
+        self.pluralName = pluralName
+    }
+}
+
+enum Period: PeriodData {
+        
+    case DAY = "1,day,days"
+    case WEEK = "7,week,weeks"
+    case FORTNIGHT = "14,fortnight,fortnights"
+    case MONTH = "30,month,months"
+    case YEAR = "365,year,years"
+    case CUSTOM = "-1"
 }
 
 /// Class that encapsulates how often one should be working out, mainly to calculate the current streak

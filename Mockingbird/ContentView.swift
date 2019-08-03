@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ContentView : View {
-    @ObjectBinding var wom: WorkOutsManager
+    @ObservedObject var wom: WorkOutsManager
     
     func today() -> Date {
         return Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!

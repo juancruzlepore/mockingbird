@@ -11,18 +11,12 @@ import SwiftUI
 import Combine
 import os.log
 
-class WorkOutsManager: BindableObject, HistoryProvider {
+class WorkOutsManager: Combine.ObservableObject, HistoryProvider {
+    
     var willChange = PassthroughSubject<Void, Never>()
-    
-//    typealias PublisherType = PassthroughSubject<Void, Never>
-    
+    let notificationCenter = NotificationCenter.default
+        
     public static let instance = WorkOutsManager()
-    
-    private enum WORKOUTS: String {
-        case WIDE_PULL_UP = "Wide Pull-up"
-        case CLOSE_PULL_UP = "Close Pull-up"
-        case PUSH_UP = "Push-up"
-    }
     
     private static func genWorkOutsMap() -> [String: WorkOut] {
         let map = WorkOutDefinitions.descriptions.reduce(into: [String: WorkOut]()) {
@@ -52,13 +46,12 @@ class WorkOutsManager: BindableObject, HistoryProvider {
         Array(Set(workOutsList).symmetricDifference(Set(frequentWorkOutsList)))
     }
     var history: [Series]
-    var score: Float32 {
-        history.reduce(0, {result, series in result + Float32(series.repetitions) * series.type.value})
-    }
+
     var historyByDay: [DaySeries] {
         let historyMap = self.mapByDate(map: self.history)
         let history = [DaySeries](historyMap.values)
         os_log("historyByDay entries : %d", history.count)
+        
         return history.sorted {$0.date > $1.date}
     }
     
@@ -96,11 +89,25 @@ class WorkOutsManager: BindableObject, HistoryProvider {
         return days.sorted {$0.date > $1.date}
     }
     
+    public func getHistoryByDay(from start: Date, to end: Date, ignoringToday: Bool = false, orderedInc: Bool = true) -> [DaySeries] {
+        let today = DateUtils.today()
+        let daysOrederedDec = self.historyByDay.filter { $0.date >= start && $0.date < end && (!ignoringToday || $0.date != today) }
+        if orderedInc {
+            return daysOrederedDec.reversed()
+        }
+        return daysOrederedDec
+    }
+        
     public func addSeries(series: Series) {
-        self.persistence?.addSeriesToHistory(series: series.toString())
-        self.history.append(series)
-        self.willChange.send()
-        self.frequentWorkOuts.insert(elem: series.type)
+        persistence?.addSeriesToHistory(series: series.toString())
+        history.append(series)
+        workoutHistoryDidChange();
+        frequentWorkOuts.insert(elem: series.type)
+    }
+    
+    private func workoutHistoryDidChange() {
+        willChange.send()
+        notificationCenter.post(name: .WorkoutHistoryChanged, object: nil)
     }
     
     private func mapByDate(map: [Series]) -> [Date:DaySeries]{

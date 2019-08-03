@@ -18,7 +18,19 @@ extension Date {
     }
     
     static func +(left: Date, right: Period) -> Date {
-        return DateUtils.addDays(amount: right.rawValue, to: left)
+        return DateUtils.addDays(amount: Int(right.rawValue.days), to: left)
+    }
+    
+    static func -(left: Date, right: Period) -> Date {
+        return DateUtils.addDays(amount: -Int(right.rawValue.days), to: left)
+    }
+    
+    static func +=(left: inout Date, right: Period) {
+        left = DateUtils.addDays(amount: Int(right.rawValue.days), to: left)
+    }
+    
+    static func -=(left: inout Date, right: Period) {
+        left = DateUtils.addDays(amount: -Int(right.rawValue.days), to: left)
     }
 }
 
