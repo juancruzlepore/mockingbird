@@ -27,10 +27,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let wom = WorkOutsManager.instance
         wom.setPersistence(persistence: CsvPersistence()).update()
 
-        let settings = Settings.instance
         let threeTimesAWeekFreq = FrequencyWithCalendarPeriod(period: .WEEK, timesInPeriod: 3, periodStart: DateUtils.getDate(dateString: "29-07-2019")!)
-        let backTarget = Target(frequency: threeTimesAWeekFreq, name: "Back", muscleFilter: { $0 == MuscleGroup.BACK })
-        settings.addTarget(target: backTarget)
+        let twiceAWeekFreq = FrequencyWithCalendarPeriod(period: .WEEK, timesInPeriod: 2, periodStart: DateUtils.getDate(dateString: "29-07-2019")!)
+        let onceAWeekFreq = FrequencyWithCalendarPeriod(period: .WEEK, timesInPeriod: 1, periodStart: DateUtils.getDate(dateString: "29-07-2019")!)
+        let backTarget = Target(frequency: twiceAWeekFreq, name: "Back", muscleFilter: { $0 == MuscleGroup.BACK })
+        let shouldersTarget = Target(frequency: onceAWeekFreq, name: "Shoulders", muscleFilter: { $0 == MuscleGroup.SHOULDERS })
+        let absTarget = Target(frequency: twiceAWeekFreq, name: "Abs", muscleFilter: { $0 == MuscleGroup.ABS })
+        let generalTarget = Target(frequency: threeTimesAWeekFreq, name: "General")
+        
+        let settings = Settings.instance
+            .addTarget(target: backTarget)
+            .addTarget(target: absTarget)
+            .addTarget(target: shouldersTarget)
         
         window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
@@ -39,7 +47,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.center()
         window.setFrameAutosaveName("Main Window")
 
-        window.contentView = NSHostingView(rootView: ContentView(wom: wom))
+        window.contentView = NSHostingView(rootView: ContentView(wom: wom, targets: settings.targets))
 
         window.makeKeyAndOrderFront(nil)
     }

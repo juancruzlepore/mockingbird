@@ -10,20 +10,33 @@ import SwiftUI
 
 struct ContentView : View {
     @ObservedObject var wom: WorkOutsManager
-    
-    func today() -> Date {
-        return Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
+    @State var selectedTarget: Int = 1
+    var targets: [Target]
+        
+    var body: some View {
+        VStack {
+            Picker(selection: $selectedTarget, label: Text("Target: ")) {
+                ForEach(targets) {
+                    Text($0.name).tag($0.id)
+                }
+            }.padding(30)
+            BaseView(wom: wom, target: TargetHandler(target: targets.filter({$0.id == selectedTarget}).first!)).frame(height: 600)
+        }
     }
+}
+
+struct BaseView: View {
+    @ObservedObject var wom: WorkOutsManager
+    @ObservedObject var target: TargetHandler
     
     var body: some View {
-        
         HStack{
             List {
-                ForEach(wom.historyByDay) { (day: DaySeries) in
+                ForEach(target.historyProvider.historyByDay) { (day: DaySeries) in
                     HStack{
                         DayView(daySeries: day)
-                        if (day.date == self.today()) {
-                            TodayScoreView(historyByDay: self.wom.historyByDay, today: day)
+                        if (day.date == DateUtils.today()) {
+                            TodayScoreView(historyByDay: self.target.historyProvider.historyByDay, today: day)
                         } else {
                             Text(String(format: "%.1f", day.score)).bold().font(Font.largeTitle)
                         }
@@ -31,11 +44,11 @@ struct ContentView : View {
                 }
             }.padding(EdgeInsets(top: 0.0, leading: 1.0, bottom: 0.0, trailing: 2.0))
             VStack{
-                StreaksView(streaks: wom.streaks)
-                if (self.wom.historyByDay.count == 0) {
+                StreaksView(streaks: target.streaks)
+                if (self.target.historyProvider.historyByDay.count == 0) {
                     AddSeriesView(mostRecentDay: nil, wom: wom)
                 } else {
-                    AddSeriesView(mostRecentDay: self.wom.historyByDay[0], wom: wom)
+                    AddSeriesView(mostRecentDay: self.target.historyProvider.historyByDay[0], wom: wom)
                 }
             }.padding(EdgeInsets(top: 0.0, leading: 1.0, bottom: 0.0, trailing: 20.0))
         }
@@ -90,7 +103,7 @@ struct TodayScoreView: View {
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
-        ContentView(wom: WorkOutsManager.instance)
+        ContentView(wom: WorkOutsManager.instance, targets: [])
     }
 }
 #endif

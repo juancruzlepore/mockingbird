@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import os.log
 
 class FilteredHistoryProvider: HistoryProvider {
     let wom = WorkOutsManager.instance
@@ -17,6 +18,11 @@ class FilteredHistoryProvider: HistoryProvider {
     }
     
     var history: [Series] {
-        wom.history.filter { filter.seriesFilter($0) }
+        wom.getHistory().filter {
+            filter.seriesFilter($0)
+            && $0.type.getValues(muscleFilter: filter.muscleFilter) > 0.0
+        } .map { (s) -> FilteredSeries in
+            FilteredSeries(base: s, filter: self.filter.muscleFilter)
+        }
     }
 }

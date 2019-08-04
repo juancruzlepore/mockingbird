@@ -9,8 +9,6 @@
 import Foundation
 import os.log
 
-
-
 final class WorkOutDefinitions {
     public static let L_SIT_VAL: Float = 0.3
     public static let descriptions: [WorkOut] = [
@@ -70,7 +68,38 @@ final class WorkOutDefinitions {
         ),
         WorkOut(
             name: "Wide Push-up",
-            values: [.CHEST:1.1],
+            values: [
+                .CHEST:1.1,
+                .SHOULDERS:0.3
+            ],
+            movementType: .PUSH
+        ),
+        WorkOut(
+            name: "Crunch",
+            values: [.ABS:0.4],
+            movementType: .OTHER
+        ),
+        WorkOut(
+            name: "Archer Push-up",
+            values: [.CHEST:1.6],
+            movementType: .PUSH
+        ),
+        WorkOut(
+            name: "Shoulder Push-up",
+            values: [.SHOULDERS:1.4],
+            movementType: .PUSH
+        ),
+        WorkOut(
+            name: "Elevated Shoulder Push-up",
+            values: [.SHOULDERS:1.7],
+            movementType: .PUSH
+        ),
+        WorkOut(
+            name: "Hindu Push-up",
+            values: [
+                .SHOULDERS:2.2,
+                .CHEST:1.4
+            ],
             movementType: .PUSH
         ),
     ]

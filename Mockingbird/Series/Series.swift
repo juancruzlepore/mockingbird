@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-struct Series: Identifiable {
+class Series: Identifiable {
     
     private static var counter: Int = 0
     private static func nextId() -> Int {
@@ -33,7 +33,7 @@ struct Series: Identifiable {
     }
     
     public func getScore(muscleFilter: MuscleFilter) -> Float {
-        return type.getValues(muscleFilter: muscleFilter)
+        return Float(repetitions) * type.getValues(muscleFilter: muscleFilter)
     }
     
     public func toString() -> String {

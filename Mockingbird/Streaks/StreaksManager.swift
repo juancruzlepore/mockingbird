@@ -7,13 +7,15 @@
 //
 
 import Foundation
+import Combine
 import os.log
 
-class StreaksManager {
-    
-    init(historyProvider: HistoryProvider) {
+class StreaksManager: ObservableObject {
+    let willChange = ObservableObjectPublisher()
+
+    init(historyProvider: HistoryProvider, frequency: Frequency) {
         self.historyProvider = historyProvider
-        freq = FrequencyWithCalendarPeriod(period: .WEEK, timesInPeriod: 3, periodStart: DateUtils.getDate(dateString: "29-07-2019")!)
+        self.freq = frequency
         NotificationCenter.default.addObserver(self,
             selector: #selector(update),
             name: .WorkoutHistoryChanged,
@@ -26,8 +28,8 @@ class StreaksManager {
     let freq: Frequency
     
     var periodTarget: Int { freq.timesInPeriod }
-    var timesThisPeriod: Int = 0
-    var currentStreak: Int = 0
+    @Published var currentStreak: Int = 0
+    @Published var timesThisPeriod: Int = 0
     
     @objc private func update() {
         currentStreak = getCurrentStreak(withFrequency: freq)
@@ -87,7 +89,6 @@ class StreaksManager {
             }
             startDate -= freq.period
             endDate -= freq.period
-            os_log("times in period: %d", times)
         }
         while(times >= target)
         

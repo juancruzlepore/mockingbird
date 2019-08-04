@@ -32,7 +32,7 @@ class WorkOutsManager: Combine.ObservableObject, HistoryProvider {
         self.frequentWorkOuts = SortedRecentSet(maxSize: 5)
     }
     
-    lazy var streaks: StreaksManager = StreaksManager(historyProvider: self) // MARK: reference loop?
+//    lazy var streaks: StreaksManager = StreaksManager(historyProvider: self) // MARK: reference loop?
     var persistence: Persistence?
     var workOutsMap: [String: WorkOut]
     var workOutsList: [WorkOut] {
@@ -47,7 +47,10 @@ class WorkOutsManager: Combine.ObservableObject, HistoryProvider {
     }
     
     @Published var history: [Series]
-
+    
+    public func getHistory() -> [Series] {
+        return self.history
+    }
     
     public func setPersistence(persistence: Persistence) -> WorkOutsManager {
         self.persistence = persistence

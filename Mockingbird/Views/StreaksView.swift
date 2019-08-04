@@ -22,27 +22,26 @@ struct StreaksView: View {
 }
 
 struct PeriodStreakView: View {
-    let streaks: StreaksManager
+    @ObservedObject var streaks: StreaksManager
     
     var body: some View {
         HStack{
             Text("This " + streaks.freq.period.rawValue.singularName + String(format: ": %d / %d",
-                streaks.timesThisPeriod,
-                streaks.periodTarget))
+                streaks.timesThisPeriod as Int,
+                streaks.periodTarget as Int))
             if (streaks.timesThisPeriod >= streaks.periodTarget){
                 Text(" ✓").foregroundColor(Color.green)
             }
         }
-        
     }
 }
 
 struct CurrentPeriodView: View {
-    let streaks: StreaksManager
+    @ObservedObject var streaks: StreaksManager
     
     var body: some View {
         Text(String(format: "Current streak: %d ",
-                    streaks.currentStreak) +
+                    streaks.currentStreak as Int) +
                     (streaks.currentStreak == 1 ? Period.WEEK.rawValue.singularName : Period.WEEK.rawValue.pluralName))
     }
 }

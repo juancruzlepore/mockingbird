@@ -9,5 +9,8 @@
 import Foundation
 
 enum MovementType: String {
-    case PUSH = "Push", PULL = "Pull"
+    case PUSH = "Push"
+    case PULL = "Pull"
+    case ISOMETRIC = "Isometric"
+    case OTHER = "Other" // crunches?
 }

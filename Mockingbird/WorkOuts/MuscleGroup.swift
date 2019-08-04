@@ -9,7 +9,9 @@
 import Foundation
 
 enum MuscleGroup: String {
+    case ABS = "Abs"
     case BACK = "Back"
     case CHEST = "Chest"
-    case ABS = "Abs"
+    case SHOULDERS = "Shoulders"
+    case LEGS = "Legs"
 }
