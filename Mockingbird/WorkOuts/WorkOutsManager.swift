@@ -11,18 +11,12 @@ import SwiftUI
 import Combine
 import os.log
 
-class WorkOutsManager: BindableObject, HistoryProvider {
-    var willChange = PassthroughSubject<Void, Never>()
+class WorkOutsManager: Combine.ObservableObject, HistoryProvider {
     
-//    typealias PublisherType = PassthroughSubject<Void, Never>
-    
+    let willChange = ObservableObjectPublisher()
+    let notificationCenter = NotificationCenter.default
+        
     public static let instance = WorkOutsManager()
-    
-    private enum WORKOUTS: String {
-        case WIDE_PULL_UP = "Wide Pull-up"
-        case CLOSE_PULL_UP = "Close Pull-up"
-        case PUSH_UP = "Push-up"
-    }
     
     private static func genWorkOutsMap() -> [String: WorkOut] {
         let map = WorkOutDefinitions.descriptions.reduce(into: [String: WorkOut]()) {
@@ -51,16 +45,9 @@ class WorkOutsManager: BindableObject, HistoryProvider {
     var infrequentWorkOutsList: [WorkOut] {
         Array(Set(workOutsList).symmetricDifference(Set(frequentWorkOutsList)))
     }
-    var history: [Series]
-    var score: Float32 {
-        history.reduce(0, {result, series in result + Float32(series.repetitions) * series.type.value})
-    }
-    var historyByDay: [DaySeries] {
-        let historyMap = self.mapByDate(map: self.history)
-        let history = [DaySeries](historyMap.values)
-        os_log("historyByDay entries : %d", history.count)
-        return history.sorted {$0.date > $1.date}
-    }
+    
+    @Published var history: [Series]
+
     
     public func setPersistence(persistence: Persistence) -> WorkOutsManager {
         self.persistence = persistence
@@ -88,29 +75,16 @@ class WorkOutsManager: BindableObject, HistoryProvider {
         }
         return
     }
-    
-    public func getHistoryByDay(where: (Series) -> Bool) -> [DaySeries] {
-        let filteredHistory = history.filter(`where`)
-        let filteredMap = self.mapByDate(map: filteredHistory)
-        let days = [DaySeries](filteredMap.values)
-        return days.sorted {$0.date > $1.date}
-    }
-    
+        
     public func addSeries(series: Series) {
-        self.persistence?.addSeriesToHistory(series: series.toString())
-        self.history.append(series)
-        self.willChange.send()
-        self.frequentWorkOuts.insert(elem: series.type)
+        persistence?.addSeriesToHistory(series: series.toString())
+        history.append(series)
+        workoutHistoryDidChange();
+        frequentWorkOuts.insert(elem: series.type)
     }
     
-    private func mapByDate(map: [Series]) -> [Date:DaySeries]{
-        var historyMap = [Date:DaySeries]()
-        for s in history {
-            if (historyMap[s.date] == nil){
-                historyMap[s.date] = DaySeries(date: s.date)
-            }
-            historyMap[s.date]!.addSeries(series: s)
-        }
-        return historyMap
+    private func workoutHistoryDidChange() {
+        willChange.send()
+        notificationCenter.post(name: .WorkoutHistoryChanged, object: nil)
     }
 }

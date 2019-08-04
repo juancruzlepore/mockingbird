@@ -14,17 +14,36 @@ struct StreaksView: View {
     var body: some View {
         VStack{
             Text("Streak").font(Font.title)
-            DaysStreakView(streaks: streaks)
+            PeriodStreakView(streaks: streaks)
+            CurrentPeriodView(streaks: streaks)
             WeekImprovementView(weekOverWeekRatio: streaks.getWeekOverWeekRatio())
         }
     }
 }
 
-struct DaysStreakView: View {
+struct PeriodStreakView: View {
     let streaks: StreaksManager
     
     var body: some View {
-        Text(String(format: "Current streak: %d", streaks.getCurrentStreak()))
+        HStack{
+            Text("This " + streaks.freq.period.rawValue.singularName + String(format: ": %d / %d",
+                streaks.timesThisPeriod,
+                streaks.periodTarget))
+            if (streaks.timesThisPeriod >= streaks.periodTarget){
+                Text(" ✓").foregroundColor(Color.green)
+            }
+        }
+        
+    }
+}
+
+struct CurrentPeriodView: View {
+    let streaks: StreaksManager
+    
+    var body: some View {
+        Text(String(format: "Current streak: %d ",
+                    streaks.currentStreak) +
+                    (streaks.currentStreak == 1 ? Period.WEEK.rawValue.singularName : Period.WEEK.rawValue.pluralName))
     }
 }
 

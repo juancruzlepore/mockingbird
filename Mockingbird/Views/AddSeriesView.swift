@@ -19,7 +19,7 @@ struct AddSeriesView: View {
     @State var reps = repsDefault
     @State var selectedWorkout = 1
     @State var lastRepsAdded: Int? = nil
-    @ObjectBinding var wom: WorkOutsManager
+    @ObservedObject var wom: WorkOutsManager
     
     private func addToReps(amount: Int){
         self.reps = max(1, self.reps + amount)

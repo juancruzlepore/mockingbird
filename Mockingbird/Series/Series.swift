@@ -32,6 +32,10 @@ struct Series: Identifiable {
         self.date = date
     }
     
+    public func getScore(muscleFilter: MuscleFilter) -> Float {
+        return type.getValues(muscleFilter: muscleFilter)
+    }
+    
     public func toString() -> String {
         return self.type.name
             + ", " + String(self.repetitions)
