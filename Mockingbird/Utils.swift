@@ -28,4 +28,15 @@ class Utils {
     static func getPenultimateWeekScore(from series: [Series]) -> Float {
         return Utils.getScore(from: series, after: DateUtils.addWeeksToToday(amount: -2), before: DateUtils.addWeeksToToday(amount: -1))
     }
+    
+    static func mapByDate(series: [Series]) -> [Date:DaySeries]{
+        var historyMap = [Date:DaySeries]()
+        for s in series {
+            if (historyMap[s.date] == nil){
+                historyMap[s.date] = DaySeries(date: s.date)
+            }
+            historyMap[s.date]!.addSeries(series: s)
+        }
+        return historyMap
+    }
 }

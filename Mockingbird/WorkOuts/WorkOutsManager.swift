@@ -13,7 +13,7 @@ import os.log
 
 class WorkOutsManager: Combine.ObservableObject, HistoryProvider {
     
-    var willChange = PassthroughSubject<Void, Never>()
+    let willChange = ObservableObjectPublisher()
     let notificationCenter = NotificationCenter.default
         
     public static let instance = WorkOutsManager()
@@ -45,15 +45,9 @@ class WorkOutsManager: Combine.ObservableObject, HistoryProvider {
     var infrequentWorkOutsList: [WorkOut] {
         Array(Set(workOutsList).symmetricDifference(Set(frequentWorkOutsList)))
     }
-    var history: [Series]
+    
+    @Published var history: [Series]
 
-    var historyByDay: [DaySeries] {
-        let historyMap = self.mapByDate(map: self.history)
-        let history = [DaySeries](historyMap.values)
-        os_log("historyByDay entries : %d", history.count)
-        
-        return history.sorted {$0.date > $1.date}
-    }
     
     public func setPersistence(persistence: Persistence) -> WorkOutsManager {
         self.persistence = persistence
@@ -81,22 +75,6 @@ class WorkOutsManager: Combine.ObservableObject, HistoryProvider {
         }
         return
     }
-    
-    public func getHistoryByDay(where: (Series) -> Bool) -> [DaySeries] {
-        let filteredHistory = history.filter(`where`)
-        let filteredMap = self.mapByDate(map: filteredHistory)
-        let days = [DaySeries](filteredMap.values)
-        return days.sorted {$0.date > $1.date}
-    }
-    
-    public func getHistoryByDay(from start: Date, to end: Date, ignoringToday: Bool = false, orderedInc: Bool = true) -> [DaySeries] {
-        let today = DateUtils.today()
-        let daysOrederedDec = self.historyByDay.filter { $0.date >= start && $0.date < end && (!ignoringToday || $0.date != today) }
-        if orderedInc {
-            return daysOrederedDec.reversed()
-        }
-        return daysOrederedDec
-    }
         
     public func addSeries(series: Series) {
         persistence?.addSeriesToHistory(series: series.toString())
@@ -108,16 +86,5 @@ class WorkOutsManager: Combine.ObservableObject, HistoryProvider {
     private func workoutHistoryDidChange() {
         willChange.send()
         notificationCenter.post(name: .WorkoutHistoryChanged, object: nil)
-    }
-    
-    private func mapByDate(map: [Series]) -> [Date:DaySeries]{
-        var historyMap = [Date:DaySeries]()
-        for s in history {
-            if (historyMap[s.date] == nil){
-                historyMap[s.date] = DaySeries(date: s.date)
-            }
-            historyMap[s.date]!.addSeries(series: s)
-        }
-        return historyMap
     }
 }

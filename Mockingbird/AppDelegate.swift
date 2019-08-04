@@ -21,13 +21,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow!
 
-
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         os_log("Application Did Finish Launching.")
         let wom = WorkOutsManager.instance
         wom.setPersistence(persistence: CsvPersistence()).update()
 
+        let settings = Settings.instance
+        let threeTimesAWeekFreq = FrequencyWithCalendarPeriod(period: .WEEK, timesInPeriod: 3, periodStart: DateUtils.getDate(dateString: "29-07-2019")!)
+        let backTarget = Target(frequency: threeTimesAWeekFreq, name: "Back", muscleFilter: { $0 == MuscleGroup.BACK })
+        settings.addTarget(target: backTarget)
+        
         window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
             styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],

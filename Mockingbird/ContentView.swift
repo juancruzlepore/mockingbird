@@ -27,9 +27,9 @@ struct ContentView : View {
                         } else {
                             Text(String(format: "%.1f", day.score)).bold().font(Font.largeTitle)
                         }
-                    }.padding(EdgeInsets(top: CGFloat(0.0), leading: CGFloat(-30.0), bottom: CGFloat(0.0), trailing: CGFloat(5.0)))
+                    }.padding(EdgeInsets(top: 0.0, leading: -30.0, bottom: 0.0, trailing: 5.0))
                 }
-            }.padding(EdgeInsets(top: CGFloat(0.0), leading: CGFloat(1.0), bottom: CGFloat(0.0), trailing: CGFloat(2.0)))
+            }.padding(EdgeInsets(top: 0.0, leading: 1.0, bottom: 0.0, trailing: 2.0))
             VStack{
                 StreaksView(streaks: wom.streaks)
                 if (self.wom.historyByDay.count == 0) {
@@ -37,15 +37,15 @@ struct ContentView : View {
                 } else {
                     AddSeriesView(mostRecentDay: self.wom.historyByDay[0], wom: wom)
                 }
-            }.padding(EdgeInsets(top: CGFloat(0.0), leading: CGFloat(1.0), bottom: CGFloat(0.0), trailing: CGFloat(20.0)))
+            }.padding(EdgeInsets(top: 0.0, leading: 1.0, bottom: 0.0, trailing: 20.0))
         }
     }
 }
 
 struct DayView: View {
     var daySeries: DaySeries
-    var zeroPadding = EdgeInsets(top: CGFloat(0.0), leading: CGFloat(0.0), bottom: CGFloat(0.0), trailing: CGFloat(0.0))
-    var noSpaceList = EdgeInsets(top: CGFloat(-8.0), leading: CGFloat(0.0), bottom: CGFloat(0.0), trailing: CGFloat(0.0))
+    var zeroPadding = EdgeInsets(top: 0.0, leading: 0.0, bottom: 0.0, trailing: 0.0)
+    var noSpaceList = EdgeInsets(top: -8.0, leading: 0.0, bottom: 0.0, trailing: 0.0)
     var body: some View {
         VStack {
             Text(daySeries.dateString)

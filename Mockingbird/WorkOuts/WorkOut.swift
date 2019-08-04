@@ -9,6 +9,19 @@
 import Foundation
 import SwiftUI
 
+typealias SeriesFilter = (Series) -> Bool
+typealias MuscleFilter = (MuscleGroup) -> Bool
+
+struct WorkoutFilter {
+    let seriesFilter: SeriesFilter
+    let muscleFilter: MuscleFilter
+    
+    init(seriesFilter: @escaping SeriesFilter, muscleFilter: @escaping MuscleFilter) {
+        self.seriesFilter = seriesFilter
+        self.muscleFilter = muscleFilter
+    }
+}
+
 class WorkOut: Hashable, Identifiable {
     static func == (lhs: WorkOut, rhs: WorkOut) -> Bool {
         lhs.name == rhs.name
@@ -41,9 +54,7 @@ class WorkOut: Hashable, Identifiable {
         self.id = WorkOut.nextId()
     }
     
-//    init(line: String) {
-//        let parts = line.components(separatedBy: ",")
-//        self.name = parts[0].trim()
-//        self.value = Float(parts[1].trim())!
-//    }
+    public func getValues(muscleFilter: MuscleFilter) -> Float {
+        return values.filter { muscleFilter($0.key) }.reduce(0) {$0 + $1.value}
+    }
 }

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6532F8D422F633370045ABCF /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6532F8D322F633370045ABCF /* Target.swift */; };
+		6532F8D622F6EABE0045ABCF /* FilteredHistoryProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6532F8D522F6EABE0045ABCF /* FilteredHistoryProvider.swift */; };
+		6532F8D822F6ED710045ABCF /* HistoryProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6532F8D722F6ED710045ABCF /* HistoryProvider.swift */; };
 		653BD56E22D101FD00FBFB3A /* StreaksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653BD56D22D101FD00FBFB3A /* StreaksManager.swift */; };
 		653BD57122D1023300FBFB3A /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653BD57022D1023300FBFB3A /* Settings.swift */; };
 		653BD57322D1024800FBFB3A /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653BD57222D1024800FBFB3A /* UserSettings.swift */; };
@@ -52,6 +55,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6532F8D322F633370045ABCF /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
+		6532F8D522F6EABE0045ABCF /* FilteredHistoryProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredHistoryProvider.swift; sourceTree = "<group>"; };
+		6532F8D722F6ED710045ABCF /* HistoryProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryProvider.swift; sourceTree = "<group>"; };
 		653BD56D22D101FD00FBFB3A /* StreaksManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreaksManager.swift; sourceTree = "<group>"; };
 		653BD57022D1023300FBFB3A /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		653BD57222D1024800FBFB3A /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
@@ -132,6 +138,7 @@
 			children = (
 				656B493722CA9FA9001A5B0A /* WorkOutsManager.swift */,
 				6542B32A22CE8D280060763E /* MuscleGroup.swift */,
+				6532F8D522F6EABE0045ABCF /* FilteredHistoryProvider.swift */,
 				6542B32C22CEB8430060763E /* MovementType.swift */,
 				656B493522CA90CD001A5B0A /* WorkOut.swift */,
 				653BD57622D1305B00FBFB3A /* WorkOutDefinitions.swift */,
@@ -211,6 +218,7 @@
 				6542ABAC22EF922700EA910E /* DataStructures */,
 				6542ABA022EDAB5B00EA910E /* Errors */,
 				6580ED6E22BFDFD4005D4E71 /* ContentView.swift */,
+				6532F8D322F633370045ABCF /* Target.swift */,
 				6542AB9B22EC782F00EA910E /* Views */,
 				6580ED7322BFDFD7005D4E71 /* Assets.xcassets */,
 				6580ED7822BFDFD7005D4E71 /* Main.storyboard */,
@@ -223,6 +231,7 @@
 				653BD57422D1025C00FBFB3A /* Settings */,
 				6580ED7B22BFDFD7005D4E71 /* Info.plist */,
 				6542AB9922EA545C00EA910E /* Utils.swift */,
+				6532F8D722F6ED710045ABCF /* HistoryProvider.swift */,
 				6580ED7C22BFDFD7005D4E71 /* Mockingbird.entitlements */,
 				6580ED7022BFDFD4005D4E71 /* Mockingbird.xcdatamodeld */,
 				6580ED7522BFDFD7005D4E71 /* Preview Content */,
@@ -350,7 +359,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				656B493C22CAA007001A5B0A /* CsvPersistence.swift in Sources */,
+				6532F8D822F6ED710045ABCF /* HistoryProvider.swift in Sources */,
 				653C03DD22CC0092000F507A /* DaySeries.swift in Sources */,
+				6532F8D422F633370045ABCF /* Target.swift in Sources */,
 				6542ABA722EDCBFC00EA910E /* Day.swift in Sources */,
 				6542B32D22CEB8430060763E /* MovementType.swift in Sources */,
 				6542B32B22CE8D280060763E /* MuscleGroup.swift in Sources */,
@@ -365,6 +376,7 @@
 				656B493A22CA9FE8001A5B0A /* Persistence.swift in Sources */,
 				656B493222CA9084001A5B0A /* Series.swift in Sources */,
 				6542ABA422EDC93600EA910E /* UnsupportedPeriodTypeError.swift in Sources */,
+				6532F8D622F6EABE0045ABCF /* FilteredHistoryProvider.swift in Sources */,
 				656B493622CA90CD001A5B0A /* WorkOut.swift in Sources */,
 				65F87FB922D14F880076BD40 /* DateUtils.swift in Sources */,
 				6542ABAE22EF927900EA910E /* SortedRecentSet.swift in Sources */,

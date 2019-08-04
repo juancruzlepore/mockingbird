@@ -9,15 +9,6 @@
 import Foundation
 import os.log
 
-protocol HistoryProvider {
-    var history: [Series] { get }
-    var historyByDay: [DaySeries] { get }
-    /// Returns the history by day in a time window
-    /// - Parameter from: starting date (inclusive)
-    /// - Parameter to: end date (exclusive)
-    func getHistoryByDay(from: Date, to: Date, ignoringToday: Bool, orderedInc: Bool) -> [DaySeries]
-}
-
 class StreaksManager {
     
     init(historyProvider: HistoryProvider) {
