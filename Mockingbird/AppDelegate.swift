@@ -31,7 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let twiceAWeekFreq = FrequencyWithCalendarPeriod(period: .WEEK, timesInPeriod: 2, periodStart: DateUtils.getDate(dateString: "29-07-2019")!)
         let onceAWeekFreq = FrequencyWithCalendarPeriod(period: .WEEK, timesInPeriod: 1, periodStart: DateUtils.getDate(dateString: "29-07-2019")!)
         let backTarget = Target(frequency: twiceAWeekFreq, name: "Back", muscleFilter: { $0 == MuscleGroup.BACK })
-        let shouldersTarget = Target(frequency: onceAWeekFreq, name: "Shoulders", muscleFilter: { $0 == MuscleGroup.SHOULDERS })
+        let shouldersTarget = Target(frequency: twiceAWeekFreq, name: "Shoulders", muscleFilter: { $0 == MuscleGroup.SHOULDERS })
         let absTarget = Target(frequency: twiceAWeekFreq, name: "Abs", muscleFilter: { $0 == MuscleGroup.ABS })
         let generalTarget = Target(frequency: threeTimesAWeekFreq, name: "General")
         

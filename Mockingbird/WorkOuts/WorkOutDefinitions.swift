@@ -10,7 +10,7 @@ import Foundation
 import os.log
 
 final class WorkOutDefinitions {
-    public static let L_SIT_VAL: Float = 0.3
+    public static let L_SIT_VAL_IN_PULLUP: Float = 0.3
     public static let descriptions: [WorkOut] = [
         WorkOut(
             name: "Pull-up",
@@ -21,7 +21,7 @@ final class WorkOutDefinitions {
             name: "L-sit Pull-up",
             values: [
                 .BACK: 1.2,
-                .ABS: L_SIT_VAL
+                .ABS: L_SIT_VAL_IN_PULLUP
             ],
             movementType: .PULL
         ),
@@ -34,7 +34,7 @@ final class WorkOutDefinitions {
             name: "L-sit Wide Pull-up",
             values: [
                 .BACK: 1.4,
-                .ABS: L_SIT_VAL
+                .ABS: L_SIT_VAL_IN_PULLUP
             ],
             movementType: .PULL
         ),
@@ -52,7 +52,7 @@ final class WorkOutDefinitions {
             name: "L-sit Close Pull-up",
             values: [
                 .BACK: 1.55,
-                .ABS: L_SIT_VAL
+                .ABS: L_SIT_VAL_IN_PULLUP
             ],
             movementType: .PULL
         ),
@@ -77,6 +77,56 @@ final class WorkOutDefinitions {
         WorkOut(
             name: "Crunch",
             values: [.ABS:0.4],
+            movementType: .OTHER
+        ),
+        WorkOut(
+            name: "Cross Crunch",
+            values: [.ABS:0.7],
+            movementType: .OTHER
+        ),
+        WorkOut(
+            name: "Half HLL",
+            values: [.ABS:1.3],
+            movementType: .OTHER
+        ),
+        WorkOut(
+            name: "HLL",
+            values: [.ABS:2.0],
+            movementType: .OTHER
+        ),
+        WorkOut(
+            name: "HLL V to L",
+            values: [.ABS:3.0],
+            movementType: .OTHER
+        ),
+        WorkOut(
+            name: "Wall handstand RLL",
+            values: [.ABS:1.5], // FIXME: dont remember and just ate :(
+            movementType: .OTHER
+        ),
+        WorkOut(
+            name: "Back lever",
+            values: [.ABS:1.0], // per second?
+            movementType: .ISOMETRIC
+        ),
+        WorkOut(
+            name: "Front lever",
+            values: [.ABS:2.4],
+            movementType: .OTHER
+        ),
+        WorkOut(
+            name: "Tuck V-up",
+            values: [.ABS:1.1],
+            movementType: .OTHER
+        ),
+        WorkOut(
+            name: "Straddle V-up",
+            values: [.ABS:1.5],
+            movementType: .OTHER
+        ),
+        WorkOut(
+            name: "V-up",
+            values: [.ABS:1.8],
             movementType: .OTHER
         ),
         WorkOut(

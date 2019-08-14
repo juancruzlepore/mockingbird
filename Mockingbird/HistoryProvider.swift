@@ -19,7 +19,9 @@ extension HistoryProvider {
 
     func getHistoryByDay(from start: Date, to end: Date, ignoringToday: Bool = false, orderedInc: Bool = true) -> [DaySeries] {
         let today = DateUtils.today()
-        let daysOrederedDec = self.historyByDay.filter { $0.date >= start && $0.date < end && (!ignoringToday || $0.date != today) }
+        let daysOrederedDec = self.historyByDay.filter {
+            $0.date >= start && $0.date < end && (!ignoringToday || $0.date != today)
+        }
         if orderedInc {
             return daysOrederedDec.reversed()
         }

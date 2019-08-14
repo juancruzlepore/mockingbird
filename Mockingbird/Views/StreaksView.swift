@@ -40,9 +40,16 @@ struct CurrentPeriodView: View {
     @ObservedObject var streaks: StreaksManager
     
     var body: some View {
-        Text(String(format: "Current streak: %d ",
-                    streaks.currentStreak as Int) +
-                    (streaks.currentStreak == 1 ? Period.WEEK.rawValue.singularName : Period.WEEK.rawValue.pluralName))
+        VStack{
+            Text(String(format: "Current streak: %d ",
+                        streaks.currentStreak as Int) +
+                        (streaks.currentStreak == 1 ? Period.WEEK.rawValue.singularName : Period.WEEK.rawValue.pluralName))
+            if (streaks.currentPeriodStart != nil && streaks.currentPeriodEnd != nil){
+                Text(DateUtils.toShowWithWeekDay(date: streaks.currentPeriodStart!)
+                    + " - "
+                    + DateUtils.toShowWithWeekDay(date: streaks.currentPeriodEnd! - Day(1))).foregroundColor(Color.gray)
+            }
+        }
     }
 }
 

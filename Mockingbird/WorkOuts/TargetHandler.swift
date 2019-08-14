@@ -16,7 +16,10 @@ class TargetHandler: ObservableObject {
     let target: Target
     let historyProvider: HistoryProvider
     let streaks: StreaksManager
-
+    var workouts: [WorkOut] {
+        WorkOutDefinitions.descriptions.filter({ $0.values.contains(where: { (e) -> Bool in target.muscleFilter(e.key) }) })
+    }
+    
     init(target: Target){
         self.target = target
         let newHistoryProvider = FilteredHistoryProvider(filter: target.workoutFilter)
@@ -27,6 +30,11 @@ class TargetHandler: ObservableObject {
         NotificationCenter.default.addObserver(self,
             selector: #selector(update),
             name: .WorkoutHistoryChanged,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(update),
+            name: .NSCalendarDayChanged,
             object: nil
         )
     }

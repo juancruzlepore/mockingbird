@@ -10,9 +10,13 @@ import Foundation
 
 extension Date {
     static func +(left: Date, right: Day) -> Date {
-            return DateUtils.addDays(amount: right.number, to: left)
-        }
-        
+        return DateUtils.addDays(amount: right.number, to: left)
+    }
+    
+    static func -(left: Date, right: Day) -> Date {
+        return DateUtils.addDays(amount: -right.number, to: left)
+    }
+    
     static func +(left: Date, right: Week) -> Date {
         return DateUtils.addDays(amount: right.number * 7, to: left)
     }
@@ -37,6 +41,7 @@ extension Date {
 final class DateUtils {
     private let dateFormatterStore = DateFormatter()
     private let dateFormatterShow = DateFormatter()
+    private let dateFormatterShortDayOfWeek = DateFormatter()
     public static let SECOND: TimeInterval = 1
     public static let MINUTE: TimeInterval = 60
     public static let HOUR: TimeInterval = 60 * MINUTE
@@ -44,6 +49,7 @@ final class DateUtils {
     
     private static let dateFormatStore = "dd-MM-yyyy"
     private static let dateFormatShow = "MMM dd, yyyy"
+    private static let dateFormatShortDayOfWeek = "EEE dd/MM"
     
     static let instance = DateUtils()
     
@@ -53,6 +59,7 @@ final class DateUtils {
         dateFormatterStore.locale = Locale.current
         
         dateFormatterShow.dateFormat = DateUtils.dateFormatShow
+        dateFormatterShortDayOfWeek.dateFormat = DateUtils.dateFormatShortDayOfWeek
         
     }
     
@@ -82,6 +89,10 @@ final class DateUtils {
     
     static func addWeeksToToday(amount: Int) -> Date {
         return DateUtils.addDays(amount: amount * 7, to: DateUtils.today())
+    }
+    
+    static func toShowWithWeekDay(date: Date) -> String {
+        return instance.dateFormatterShortDayOfWeek.string(from: date)
     }
 
 }

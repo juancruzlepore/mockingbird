@@ -46,9 +46,9 @@ struct BaseView: View {
             VStack{
                 StreaksView(streaks: target.streaks)
                 if (self.target.historyProvider.historyByDay.count == 0) {
-                    AddSeriesView(mostRecentDay: nil, wom: wom)
+                    AddSeriesView(mostRecentDay: nil, wom: wom, target: target)
                 } else {
-                    AddSeriesView(mostRecentDay: self.target.historyProvider.historyByDay[0], wom: wom)
+                    AddSeriesView(mostRecentDay: self.target.historyProvider.historyByDay[0], wom: wom, target: target)
                 }
             }.padding(EdgeInsets(top: 0.0, leading: 1.0, bottom: 0.0, trailing: 20.0))
         }
@@ -94,7 +94,7 @@ struct TodayScoreView: View {
                     Text(String(format: "%.1f ▴", today.score)).bold().font(Font.largeTitle).foregroundColor(Color.green)
                 }
             } else {
-                    Text(String(format: "%.1f", today.score)).bold().font(Font.largeTitle)
+                Text(String(format: "%.1f", today.score)).bold().font(Font.largeTitle)
             }
         }
     }

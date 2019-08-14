@@ -20,6 +20,7 @@ struct AddSeriesView: View {
     @State var selectedWorkout = 1
     @State var lastRepsAdded: Int? = nil
     @ObservedObject var wom: WorkOutsManager
+    @ObservedObject var target: TargetHandler
     
     private func addToReps(amount: Int){
         self.reps = max(1, self.reps + amount)
@@ -29,13 +30,13 @@ struct AddSeriesView: View {
         VStack{
             Text("Add workout").font(Font.title)
             Picker(selection: $selectedWorkout, label: Text("Workout")) {
-                ForEach(self.wom.frequentWorkOutsList) { (w: WorkOut) in
+                ForEach(self.wom.frequentWorkOutsList.filter({target.workouts.contains($0)})) { (w: WorkOut) in
                     Text(w.name).tag(w.id)
                 }
                 if(!self.wom.frequentWorkOutsList.isEmpty){
                     Text("--separator--").disabled(true)
                 }
-                ForEach(self.wom.infrequentWorkOutsList) { (w: WorkOut) in
+                ForEach(self.wom.infrequentWorkOutsList.filter({target.workouts.contains($0)})) { (w: WorkOut) in
                     Text(w.name).tag(w.id)
                 }
             }

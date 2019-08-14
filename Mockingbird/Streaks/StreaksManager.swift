@@ -30,6 +30,8 @@ class StreaksManager: ObservableObject {
     var periodTarget: Int { freq.timesInPeriod }
     @Published var currentStreak: Int = 0
     @Published var timesThisPeriod: Int = 0
+    @Published var currentPeriodStart: Date? = nil
+    @Published var currentPeriodEnd: Date? = nil
     
     @objc private func update() {
         currentStreak = getCurrentStreak(withFrequency: freq)
@@ -122,6 +124,9 @@ class StreaksManager: ObservableObject {
         startDate -= freq.period
         
         let endDate = startDate + freq.period
+        self.currentPeriodStart = startDate
+        self.currentPeriodEnd = endDate
+        
         let prevPeriodDays = historyProvider.getHistoryByDay(from: startDate - freq.period, to: endDate - freq.period, ignoringToday: false, orderedInc: true)
         let curPeriodDays = historyProvider.getHistoryByDay(from: startDate, to: endDate, ignoringToday: false, orderedInc: true)
         var lastScore = prevPeriodDays.last?.score ?? 0

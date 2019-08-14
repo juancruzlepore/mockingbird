@@ -78,8 +78,8 @@
             filePath = "Mockingbird/Streaks/StreaksManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "getCurrentStreakWithCalendarPeriod(withFrequency:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +94,8 @@
             filePath = "Mockingbird/Streaks/StreaksManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "getCurrentStreakWithCalendarPeriod(withFrequency:)"
             landmarkType = "7">
          </BreakpointContent>
