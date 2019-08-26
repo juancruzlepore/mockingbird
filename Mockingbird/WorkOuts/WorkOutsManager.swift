@@ -29,7 +29,7 @@ class WorkOutsManager: Combine.ObservableObject, HistoryProvider {
     private init(){
         self.workOutsMap = WorkOutsManager.genWorkOutsMap()
         self.history = []
-        self.frequentWorkOuts = SortedRecentSet(maxSize: 5)
+        self.frequentWorkOuts = SortedRecentSet(maxSize: 10)
     }
     
 //    lazy var streaks: StreaksManager = StreaksManager(historyProvider: self) // MARK: reference loop?
@@ -75,6 +75,15 @@ class WorkOutsManager: Combine.ObservableObject, HistoryProvider {
                 return
             }
             history.append(Series(type: currentWorkOut, reps: Int(parts[1]) ?? 0, date: date!))
+        }
+        if(frequentWorkOuts.isEmpty()){
+            let periodLengthToLookBack = Period.FORTNIGHT
+            let lastWeekSeries = self.getHistoryByDay(from: DateUtils.today() - periodLengthToLookBack,
+                to: DateUtils.tomorrow(), ignoringToday: false, orderedInc: true)
+                .flatMap({$0.series.flatMap({$0.series})})
+            for s in lastWeekSeries {
+                frequentWorkOuts.insert(elem: s.type)
+            }
         }
         return
     }

@@ -66,9 +66,15 @@ struct AddSeriesView: View {
                 self.reps = AddSeriesView.repsDefault
             }) {
                 if (self.mostRecentDay != nil && self.mostRecentDay!.date == DateUtils.today()){
-                    Text(String(format: " Add (today → %.1f) ", mostRecentDay!.score + Series(type: WorkOutDefinitions.getById(ID: self.selectedWorkout)!, reps: self.reps, date: DateUtils.today()).score))
+                    Text(String(format: " Add (today → %.1f) ", mostRecentDay!.score + FilteredSeries(
+                        base: Series(type: WorkOutDefinitions.getById(ID: self.selectedWorkout)!, reps: self.reps, date: DateUtils.today()),
+                        filter: target.target.muscleFilter
+                    ).score))
                 } else {
-                    Text(String(format: " Add (today → %.1f) ", Series(type: WorkOutDefinitions.getById(ID: self.selectedWorkout)!, reps: self.reps, date: DateUtils.today()).score))
+                    Text(String(format: " Add (today → %.1f) ", FilteredSeries(
+                        base: Series(type: WorkOutDefinitions.getById(ID: self.selectedWorkout)!, reps: self.reps, date: DateUtils.today()),
+                        filter: target.target.muscleFilter
+                    ).score))
                 }
                 
             }

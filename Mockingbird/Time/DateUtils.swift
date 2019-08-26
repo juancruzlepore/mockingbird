@@ -75,8 +75,16 @@ final class DateUtils {
         return instance.dateFormatterStore.date(from: dateString)
     }
     
+    static func yesterday() -> Date {
+        return today() - Day(1)
+    }
+    
     static func today() -> Date {
         return Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
+    }
+    
+    static func tomorrow() -> Date {
+        return today() + Day(1)
     }
     
     static func addDays(amount: Int, to date: Date) -> Date {

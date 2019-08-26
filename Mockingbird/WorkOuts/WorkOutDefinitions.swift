@@ -12,67 +12,57 @@ import os.log
 final class WorkOutDefinitions {
     public static let L_SIT_VAL_IN_PULLUP: Float = 0.3
     public static let descriptions: [WorkOut] = [
-        WorkOut(
+        newPullWorkout(
             name: "Pull-up",
-            values: [.BACK:1.0],
-            movementType: .PULL
+            values: [.BACK:1.0]
         ),
-        WorkOut(
+        newPullWorkout(
             name: "L-sit Pull-up",
             values: [
                 .BACK: 1.2,
                 .ABS: L_SIT_VAL_IN_PULLUP
-            ],
-            movementType: .PULL
+            ]
         ),
-        WorkOut(
+        newPullWorkout(
             name: "Wide Pull-up",
-            values: [.BACK:1.2],
-            movementType: .PULL
+            values: [.BACK:1.2]
         ),
-        WorkOut(
+        newPullWorkout(
             name: "L-sit Wide Pull-up",
             values: [
                 .BACK: 1.4,
                 .ABS: L_SIT_VAL_IN_PULLUP
-            ],
-            movementType: .PULL
+            ]
         ),
-        WorkOut(
+        newPullWorkout(
             name: "Wide Pull-up to Chest",
-            values: [.BACK:2.0],
-            movementType: .PULL
+            values: [.BACK:2.0]
         ),
-        WorkOut(
+        newPullWorkout(
             name: "Close Pull-up",
-            values: [.BACK:1.35],
-            movementType: .PULL
+            values: [.BACK:1.35]
         ),
-        WorkOut(
+        newPullWorkout(
             name: "L-sit Close Pull-up",
             values: [
                 .BACK: 1.55,
                 .ABS: L_SIT_VAL_IN_PULLUP
-            ],
-            movementType: .PULL
+            ]
         ),
-        WorkOut(
+        newPullWorkout(
             name: "Archer Pull-up",
-            values: [.BACK:1.5],
-            movementType: .PULL
+            values: [.BACK:1.5]
         ),
-        WorkOut(
+        newPushWorkout(
             name: "Push-up",
-            values: [.CHEST:0.75],
-            movementType: .PUSH
+            values: [.CHEST:0.75]
         ),
-        WorkOut(
+        newPushWorkout(
             name: "Wide Push-up",
             values: [
                 .CHEST:1.1,
                 .SHOULDERS:0.3
-            ],
-            movementType: .PUSH
+            ]
         ),
         WorkOut(
             name: "Crunch",
@@ -87,6 +77,11 @@ final class WorkOutDefinitions {
         WorkOut(
             name: "Half HLL",
             values: [.ABS:1.3],
+            movementType: .OTHER
+        ),
+        WorkOut(
+            name: "Legs Lift",
+            values: [.ABS:1.0],
             movementType: .OTHER
         ),
         WorkOut(
@@ -129,30 +124,38 @@ final class WorkOutDefinitions {
             values: [.ABS:1.8],
             movementType: .OTHER
         ),
-        WorkOut(
+        newPushWorkout(
             name: "Archer Push-up",
-            values: [.CHEST:1.6],
-            movementType: .PUSH
+            values: [.CHEST:1.6]
         ),
-        WorkOut(
+        newPushWorkout(
             name: "Shoulder Push-up",
-            values: [.SHOULDERS:1.4],
-            movementType: .PUSH
+            values: [.SHOULDERS:1.4]
         ),
-        WorkOut(
+        newPushWorkout(
             name: "Elevated Shoulder Push-up",
-            values: [.SHOULDERS:1.7],
-            movementType: .PUSH
+            values: [.SHOULDERS:1.7]
         ),
-        WorkOut(
+        newPushWorkout(
             name: "Hindu Push-up",
             values: [
                 .SHOULDERS:2.2,
                 .CHEST:1.4
-            ],
-            movementType: .PUSH
+            ]
         ),
     ]
+    
+    private static func newPullWorkout(name: String, values: [MuscleGroup:Float]) -> WorkOut {
+        return WorkOut(name: name, values: values, movementType: .PULL)
+    }
+    
+    private static func newPushWorkout(name: String, values: [MuscleGroup:Float]) -> WorkOut {
+        return WorkOut(name: name, values: values, movementType: .PUSH)
+    }
+    
+    private static func newOtherWorkout(name: String, values: [MuscleGroup:Float]) -> WorkOut {
+        return WorkOut(name: name, values: values, movementType: .OTHER)
+    }
     
     public static func getById(ID: Int) -> WorkOut? {
         os_log("workout id: %d", ID)
