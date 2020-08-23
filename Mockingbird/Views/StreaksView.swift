@@ -13,37 +13,58 @@ struct StreaksView: View {
     
     var body: some View {
         VStack{
-            Text("Streak").font(Font.title)
-            PeriodStreakView(streaks: streaks)
-            CurrentPeriodView(streaks: streaks)
-            WeekImprovementView(weekOverWeekRatio: streaks.getWeekOverWeekRatio())
+            Text("Streak & goal").font(Font.title)
+            HStack{
+                VStack{
+                    PeriodStreakView(streaks: streaks)
+                    CurrentPeriodView(streaks: streaks)
+                    WeekImprovementView(weekOverWeekRatio: streaks.getWeekOverWeekRatio())
+                }.padding(5)
+                MultiMuscleScoreView(maxScore: Settings.instance.targetV2.maxTarget,
+                                     scores: self.scores,
+                                     references: Settings.instance.targetV2.targetByMuscle)
+            }
         }
+    }
+    
+    var scores: [MuscleGroup:Float] {
+        Series.flatten(scores: streaks.historyProvider
+            .getHistoryByDay(from: streaks.currentPeriodStart!,
+                         to: Date(),
+                         ignoringToday: false,
+                         orderedInc: false).map({$0.scorePerMuscle}))
     }
 }
 
 struct PeriodStreakView: View {
-    let streaks: StreaksManager
+    @ObservedObject var streaks: StreaksManager
     
     var body: some View {
         HStack{
             Text("This " + streaks.freq.period.rawValue.singularName + String(format: ": %d / %d",
-                streaks.timesThisPeriod,
-                streaks.periodTarget))
+                streaks.timesThisPeriod as Int,
+                streaks.periodTarget as Int))
             if (streaks.timesThisPeriod >= streaks.periodTarget){
                 Text(" ✓").foregroundColor(Color.green)
             }
         }
-        
     }
 }
 
 struct CurrentPeriodView: View {
-    let streaks: StreaksManager
+    @ObservedObject var streaks: StreaksManager
     
     var body: some View {
-        Text(String(format: "Current streak: %d ",
-                    streaks.currentStreak) +
-                    (streaks.currentStreak == 1 ? Period.WEEK.rawValue.singularName : Period.WEEK.rawValue.pluralName))
+        VStack{
+            Text(String(format: "Current streak: %d ",
+                        streaks.currentStreak as Int) +
+                        (streaks.currentStreak == 1 ? Period.WEEK.rawValue.singularName : Period.WEEK.rawValue.pluralName))
+            if (streaks.currentPeriodStart != nil && streaks.currentPeriodEnd != nil){
+                Text(DateUtils.toShowWithWeekDay(date: streaks.currentPeriodStart!)
+                    + " - "
+                    + DateUtils.toShowWithWeekDay(date: streaks.currentPeriodEnd! - Day(1))).foregroundColor(Color.gray)
+            }
+        }
     }
 }
 

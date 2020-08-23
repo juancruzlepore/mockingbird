@@ -10,10 +10,12 @@ import Foundation
 import SwiftUI
 import Combine
 
-class SeriesList: Combine.ObservableObject, Identifiable {
+class SeriesList: Combine.ObservableObject, Identifiable, SeriesGroup {
+    var allSeries: [Series] {
+        self.series
+    }
+    
     let willChange = ObservableObjectPublisher()
-
-//    var willChange = PassthroughSubject<Void, Never>()
     
     private static var counter: Int = 0
     private static func nextId() -> Int {

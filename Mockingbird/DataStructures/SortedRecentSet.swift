@@ -37,4 +37,8 @@ class SortedRecentSet<T: Hashable> {
             e1.value > e2.value
         }.map { $0.key }
     }
+    
+    func isEmpty() -> Bool {
+        return elements.count == 0
+    }
 }

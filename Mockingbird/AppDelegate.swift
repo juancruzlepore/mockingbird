@@ -9,6 +9,7 @@
 import Cocoa
 import SwiftUI
 import os.log
+import EasyStash
 
 public extension String {
     func trim() -> String{
@@ -24,13 +25,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         os_log("Application Did Finish Launching.")
-        let wom = WorkOutsManager.instance
+        let wom = WorkoutsManager.instance
         wom.setPersistence(persistence: CsvPersistence()).update()
 
-        let settings = Settings.instance
-        let threeTimesAWeekFreq = FrequencyWithCalendarPeriod(period: .WEEK, timesInPeriod: 3, periodStart: DateUtils.getDate(dateString: "29-07-2019")!)
-        let backTarget = Target(frequency: threeTimesAWeekFreq, name: "Back", muscleFilter: { $0 == MuscleGroup.BACK })
-        settings.addTarget(target: backTarget)
+        var options = Options()
+        options.folder = "Users"
+        let storage = try! Storage(options: options)
+        if let settings = try? storage.load(forKey: "settings", as: Settings.self) {
+            Settings.instance.addTargetV2(target: settings.targetV2)
+        } else {
+            Settings.instance.addTargetV2(target: TargetV2(targetByMuscle: [
+                            .ABS: 150,
+                            .ARMS: 150,
+                            .BACK: 200,
+                            .SHOULDERS: 100,
+                            .CHEST: 150,
+                            .LEGS: 100
+                        ]))
+        }
         
         window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
@@ -39,7 +51,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.center()
         window.setFrameAutosaveName("Main Window")
 
-        window.contentView = NSHostingView(rootView: ContentView(wom: wom))
+        window.contentView = NSHostingView(rootView: ContentView(targets: [Settings.defaultTarget])
+            .environmentObject(wom)
+            .environmentObject(TargetHandler.defaultTarget))
 
         window.makeKeyAndOrderFront(nil)
     }

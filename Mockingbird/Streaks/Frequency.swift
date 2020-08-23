@@ -73,6 +73,61 @@ class FrequencyWithCalendarPeriod: Frequency {
         self.periodStart = periodStart
         super.init(period: period, timesInPeriod: timesInPeriod, calendarPeriod: true)
     }
+    
+    var currentPeriodStart: Date {
+        getPeriodStartFor(week: 0)
+    }
+    
+    var currentPeriodEnd: Date {
+        getPeriodEndFor(week: 0)
+    }
+    
+    var currentPeriodInterval: DateInterval {
+        getPeriodIntervalFor(week: 0)
+    }
+    
+    var completedPeriods: Double {
+        switch self.period {
+        case .WEEK:
+            return DateInterval(start: self.periodStart, end: Date()).duration / (7 * 24 * 60 * 60)
+        default:
+            return 0 // should throw error
+        }
+    }
+    
+    var currentPeriodCompletionRatio: Double {
+        completedPeriods - floor(completedPeriods)
+    }
+    
+    /// Curreen week = 0, 1 is last week and so on
+    func getPeriodStartFor(week: Int) -> Date {
+        var dateComponents = DateComponents()
+        switch self.period {
+        case .WEEK:
+            dateComponents.day = 7 * (Int(floor(completedPeriods)) - week)
+        default:
+            return Date() // should throw error
+        }
+        return Calendar.current.date(byAdding: dateComponents, to: self.periodStart)!
+    }
+    
+    func getPeriodEndFor(week: Int) -> Date {
+        let start = getPeriodStartFor(week: week)
+        var dateComponents = DateComponents()
+        switch self.period {
+        case .WEEK:
+            dateComponents.day = 7
+        default:
+            return Date() // should throw error
+        }
+        return Calendar.current.date(byAdding: dateComponents, to: start)!
+    }
+    
+    func getPeriodIntervalFor(week: Int) -> DateInterval {
+        return DateInterval(
+            start: getPeriodStartFor(week: week),
+            end: getPeriodEndFor(week: week))
+    }
 }
 
 class FrequencyWithSlidingWindow: Frequency {

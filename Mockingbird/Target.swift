@@ -7,12 +7,28 @@
 //
 
 import Foundation
+import Combine
+import os.log
 
-struct Target {
+class Target: ObservableObject, Identifiable {
+    private static var counter: Int = 0
+    private static func nextId() -> Int {
+        Target.counter += 1
+        return Target.counter
+    }
+    
+    public let id: Int
+    
+    let willChange = ObservableObjectPublisher()
+    @Published var version: Int
+    
     let freq: Frequency
     let name: String
     let seriesFilter: SeriesFilter
     let muscleFilter: MuscleFilter
+    var workoutFilter: WorkoutFilter {
+        WorkoutFilter(seriesFilter: seriesFilter, muscleFilter: muscleFilter)
+    }
     
     init(frequency: Frequency,
          name: String,
@@ -22,5 +38,18 @@ struct Target {
         self.name = name
         self.seriesFilter = seriesFilter
         self.muscleFilter = muscleFilter
+        self.version = 0
+        self.id = Target.nextId()
+        
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(update),
+            name: .WorkoutHistoryChanged,
+            object: nil
+        )
+        os_log("Target number: %d", self.id)
+    }
+    
+    @objc private func update() {
+        self.version += 1
     }
 }

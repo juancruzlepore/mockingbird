@@ -8,34 +8,64 @@
 
 import Foundation
 
-class Settings {
+class Settings: ObservableObject, Codable {
     
-    static let instance = Settings()
-    var targets: [Target]
+    @Published var showingView: ShowingView = .base
+    @Published var showingSettings: Bool = false
     
-    private init() {
-        self.targets = []
-    }
+    private static var privateInstance = Settings()
     
-    func addTargets(targets: [Target]) -> Settings {
-        self.targets.append(contentsOf: targets)
-        return self
-    }
-    
-    func addTarget(target: Target) -> Settings {
-        self.targets.append(target)
-        return self
-    }
-    
-    func removeTarget(target: Target) -> Settings {
-        if let toRemoveIndex = self.targets.lastIndex(where: { $0.name == target.name}) {
-            self.targets.remove(at: toRemoveIndex)
+    static var instance: Settings {
+        get {
+            return Self.privateInstance
         }
+        set(newValue) {
+            Self.privateInstance = newValue
+        }
+    }
+    
+    private static let threeTimesAWeekFreq = FrequencyWithCalendarPeriod(period: .WEEK, timesInPeriod: 3, periodStart: DateUtils.getDate(dateString: "29-07-2019")!)
+    static let defaultTarget = Target(frequency: threeTimesAWeekFreq, name: "General")
+    var targetV2: TargetV2 = TargetV2(targetByMuscle: [MuscleGroup:Float]())
+    
+    func toggleShowSettings() {
+        self.showingSettings = self.showingSettings ? false : true
+    }
+    
+    func addTargetV2(target: TargetV2) -> Settings {
+        self.targetV2 = target
         return self
     }
     
-    func removeAllTargets() -> Settings {
-        targets = []
-        return self
+    func updateTarget(_ value: Float, forMuscle muscle: MuscleGroup){
+        self.targetV2.updateTarget(value, forMuscle: muscle)
+        self.objectWillChange.send()
+    }
+    
+    func getTarget(forMuscle muscle: MuscleGroup) -> Float?{
+        self.targetV2.targetByMuscle[muscle]
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case targetV2
+    }
+
+}
+
+@propertyWrapper struct SettingsMuscleGoal {
+    let muscle: MuscleGroup
+    
+    var wrappedValue: String {
+        get {
+            String(Settings.instance.targetV2.targetByMuscle[muscle] ?? 0)
+        }
+        set {
+            Settings.instance.targetV2.targetByMuscle[muscle] = Float(newValue) ?? 0
+        }
+    }
+    
+    init(muscle: MuscleGroup, defaultVal: String) {
+        self.muscle = muscle
+        self.wrappedValue = defaultVal
     }
 }

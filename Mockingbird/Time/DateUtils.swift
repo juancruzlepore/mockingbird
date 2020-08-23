@@ -10,9 +10,13 @@ import Foundation
 
 extension Date {
     static func +(left: Date, right: Day) -> Date {
-            return DateUtils.addDays(amount: right.number, to: left)
-        }
-        
+        return DateUtils.addDays(amount: right.number, to: left)
+    }
+    
+    static func -(left: Date, right: Day) -> Date {
+        return DateUtils.addDays(amount: -right.number, to: left)
+    }
+    
     static func +(left: Date, right: Week) -> Date {
         return DateUtils.addDays(amount: right.number * 7, to: left)
     }
@@ -35,15 +39,25 @@ extension Date {
 }
 
 final class DateUtils {
-    private let dateFormatterStore = DateFormatter()
-    private let dateFormatterShow = DateFormatter()
+    public let dateFormatterStore = DateFormatter()
+    public let dateFormatterShow = DateFormatter()
+    public let dateFormatterShortDayOfWeek = DateFormatter()
     public static let SECOND: TimeInterval = 1
     public static let MINUTE: TimeInterval = 60
     public static let HOUR: TimeInterval = 60 * MINUTE
     public static let DAY: TimeInterval = 24 * HOUR
-    
+    public static let WEEK: TimeInterval = 7 * DAY
+    public static var oneMonthAgo: Date {
+        Calendar.current.date(byAdding: .month, value: -1, to: Date())!
+    }
+    public static var twoWeeksAgo: Date {
+        Calendar.current.date(byAdding: .weekOfYear, value: -2, to: Date())!
+    }
+
     private static let dateFormatStore = "dd-MM-yyyy"
     private static let dateFormatShow = "MMM dd, yyyy"
+    private static let dateFormatShortDayOfWeek = "EEE dd/MM"
+    
     
     static let instance = DateUtils()
     
@@ -53,6 +67,7 @@ final class DateUtils {
         dateFormatterStore.locale = Locale.current
         
         dateFormatterShow.dateFormat = DateUtils.dateFormatShow
+        dateFormatterShortDayOfWeek.dateFormat = DateUtils.dateFormatShortDayOfWeek
         
     }
     
@@ -68,8 +83,20 @@ final class DateUtils {
         return instance.dateFormatterStore.date(from: dateString)
     }
     
+    static func yesterday() -> Date {
+        return today() - Day(1)
+    }
+    
     static func today() -> Date {
         return Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
+    }
+    
+    static func isToday(date: Date) -> Bool {
+        return Calendar.current.compare(Date(), to: date, toGranularity: .day) == .orderedSame
+    }
+    
+    static func tomorrow() -> Date {
+        return today() + Day(1)
     }
     
     static func addDays(amount: Int, to date: Date) -> Date {
@@ -82,6 +109,10 @@ final class DateUtils {
     
     static func addWeeksToToday(amount: Int) -> Date {
         return DateUtils.addDays(amount: amount * 7, to: DateUtils.today())
+    }
+    
+    static func toShowWithWeekDay(date: Date) -> String {
+        return instance.dateFormatterShortDayOfWeek.string(from: date)
     }
 
 }

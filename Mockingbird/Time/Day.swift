@@ -11,6 +11,10 @@ import Foundation
 struct Day {
     let number: Int
     
+    var seconds: Double {
+        Double(number) * 24.0 * 60.0 * 60.0
+    }
+    
     init(_ number: Int){
         self.number = number
     }

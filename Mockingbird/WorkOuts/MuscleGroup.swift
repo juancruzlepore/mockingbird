@@ -8,8 +8,11 @@
 
 import Foundation
 
-enum MuscleGroup: String {
+enum MuscleGroup: String, CaseIterable, Codable {
+    case ARMS = "Arms"
+    case ABS = "Abs"
     case BACK = "Back"
     case CHEST = "Chest"
-    case ABS = "Abs"
+    case LEGS = "Legs"
+    case SHOULDERS = "Shoulders"
 }

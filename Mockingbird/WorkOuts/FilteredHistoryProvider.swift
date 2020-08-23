@@ -7,16 +7,26 @@
 //
 
 import Foundation
+import os.log
 
-class FilteredHistoryProvider: HistoryProvider {
-    let wom = WorkOutsManager.instance
-    let filter: WorkoutFilter
+struct FilteredHistoryProvider: HistoryProvider {
+    let wom = WorkoutsManager.instance
+    let workoutFilter: WorkoutFilter?
+    let dateInterval: DateInterval?
     
-    init(filter: WorkoutFilter){
-        self.filter = filter
+    init(workoutFilter: WorkoutFilter? = nil, dateInterval: DateInterval? = nil){
+        self.workoutFilter = workoutFilter
+        self.dateInterval = dateInterval
     }
     
     var history: [Series] {
-        wom.history.filter { filter.seriesFilter($0) }
+        wom.getHistory().filter {
+            workoutFilter?.apply(series: $0) ?? true
+        } .filter {
+            dateInterval?.contains($0.date) ?? true
+        }
+        .map { (s) -> FilteredSeries in
+            FilteredSeries(base: s, filter: self.workoutFilter?.muscleFilter)
+        }
     }
 }
