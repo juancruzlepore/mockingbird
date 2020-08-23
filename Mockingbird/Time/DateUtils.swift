@@ -39,17 +39,25 @@ extension Date {
 }
 
 final class DateUtils {
-    private let dateFormatterStore = DateFormatter()
-    private let dateFormatterShow = DateFormatter()
-    private let dateFormatterShortDayOfWeek = DateFormatter()
+    public let dateFormatterStore = DateFormatter()
+    public let dateFormatterShow = DateFormatter()
+    public let dateFormatterShortDayOfWeek = DateFormatter()
     public static let SECOND: TimeInterval = 1
     public static let MINUTE: TimeInterval = 60
     public static let HOUR: TimeInterval = 60 * MINUTE
     public static let DAY: TimeInterval = 24 * HOUR
-    
+    public static let WEEK: TimeInterval = 7 * DAY
+    public static var oneMonthAgo: Date {
+        Calendar.current.date(byAdding: .month, value: -1, to: Date())!
+    }
+    public static var twoWeeksAgo: Date {
+        Calendar.current.date(byAdding: .weekOfYear, value: -2, to: Date())!
+    }
+
     private static let dateFormatStore = "dd-MM-yyyy"
     private static let dateFormatShow = "MMM dd, yyyy"
     private static let dateFormatShortDayOfWeek = "EEE dd/MM"
+    
     
     static let instance = DateUtils()
     
@@ -81,6 +89,10 @@ final class DateUtils {
     
     static func today() -> Date {
         return Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
+    }
+    
+    static func isToday(date: Date) -> Bool {
+        return Calendar.current.compare(Date(), to: date, toGranularity: .day) == .orderedSame
     }
     
     static func tomorrow() -> Date {

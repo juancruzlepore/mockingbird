@@ -13,11 +13,26 @@ struct StreaksView: View {
     
     var body: some View {
         VStack{
-            Text("Streak").font(Font.title)
-            PeriodStreakView(streaks: streaks)
-            CurrentPeriodView(streaks: streaks)
-            WeekImprovementView(weekOverWeekRatio: streaks.getWeekOverWeekRatio())
+            Text("Streak & goal").font(Font.title)
+            HStack{
+                VStack{
+                    PeriodStreakView(streaks: streaks)
+                    CurrentPeriodView(streaks: streaks)
+                    WeekImprovementView(weekOverWeekRatio: streaks.getWeekOverWeekRatio())
+                }.padding(5)
+                MultiMuscleScoreView(maxScore: Settings.instance.targetV2.maxTarget,
+                                     scores: self.scores,
+                                     references: Settings.instance.targetV2.targetByMuscle)
+            }
         }
+    }
+    
+    var scores: [MuscleGroup:Float] {
+        Series.flatten(scores: streaks.historyProvider
+            .getHistoryByDay(from: streaks.currentPeriodStart!,
+                         to: Date(),
+                         ignoringToday: false,
+                         orderedInc: false).map({$0.scorePerMuscle}))
     }
 }
 

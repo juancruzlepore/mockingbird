@@ -9,14 +9,14 @@
 import Foundation
 
 class FilteredSeries: Series {
-    let filter: MuscleFilter
+    let filter: MuscleFilter?
     
     override public var score: Float {
         self.getScore(muscleFilter: filter)
     }
     
-    init(base: Series, filter: @escaping MuscleFilter){
+    init(base: Series, filter: MuscleFilter?){
         self.filter = filter
-        super.init(type: base.type, reps: base.repetitions, date: base.date)
+        super.init(type: base.workout, reps: base.repetitions, date: base.date)
     }
 }

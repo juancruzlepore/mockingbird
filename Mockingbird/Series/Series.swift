@@ -9,7 +9,11 @@
 import Foundation
 import SwiftUI
 
-class Series: Identifiable {
+class Series: Identifiable, SeriesGroup {
+    
+    var allSeries: [Series] {
+        [self]
+    }
     
     private static var counter: Int = 0
     private static func nextId() -> Int {
@@ -18,26 +22,30 @@ class Series: Identifiable {
     }
     
     public let id: Int
-    public let type: WorkOut
+    public let workout: Workout
     public let repetitions: Int
     public let date: Date
     public var score: Float {
-        Float(repetitions) * type.value
+        Float(repetitions) * workout.value
     }
     
-    init(type: WorkOut, reps: Int, date: Date){
+    init(type: Workout, reps: Int, date: Date){
         self.id = Series.nextId()
-        self.type = type
+        self.workout = type
         self.repetitions = reps
         self.date = date
     }
     
-    public func getScore(muscleFilter: MuscleFilter) -> Float {
-        return Float(repetitions) * type.getValues(muscleFilter: muscleFilter)
+    public func getScore(muscleFilter: MuscleFilter?) -> Float {
+        if (muscleFilter == nil) {
+            return score
+        } else {
+            return Float(repetitions) * workout.getValues(muscleFilter: muscleFilter!)
+        }
     }
     
     public func toString() -> String {
-        return self.type.name
+        return self.workout.name
             + ", " + String(self.repetitions)
             + ", " + DateUtils.toStore(date: self.date)
     }

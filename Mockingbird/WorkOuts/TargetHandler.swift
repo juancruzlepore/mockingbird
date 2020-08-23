@@ -8,34 +8,46 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 class TargetHandler: ObservableObject {
-    let willChange = ObservableObjectPublisher()
+    static let defaultTarget = TargetHandler(
+        target: Settings.defaultTarget)
+    
     @Published var version: Int
+    @ObservedObject var wom: WorkoutsManager = WorkoutsManager.instance
     
     let target: Target
     let historyProvider: HistoryProvider
     let streaks: StreaksManager
-    var workouts: [WorkOut] {
-        WorkOutDefinitions.descriptions.filter({ $0.values.contains(where: { (e) -> Bool in target.muscleFilter(e.key) }) })
+    var workouts: [Workout] {
+        WorkoutDefinitions.descriptions.filter({ $0.values.contains(where: { (e) -> Bool in target.muscleFilter(e.key) }) })
+    }
+    
+    /// Weeks before current one, 0 means current week
+    func historyProviderFor(week: Int) -> HistoryProvider {
+        return FilteredHistoryProvider(
+            workoutFilter: target.workoutFilter,
+            dateInterval: (target.freq as! FrequencyWithCalendarPeriod).getPeriodIntervalFor(week: week))
     }
     
     init(target: Target){
         self.target = target
-        let newHistoryProvider = FilteredHistoryProvider(filter: target.workoutFilter)
+        let newHistoryProvider = FilteredHistoryProvider(
+            workoutFilter: target.workoutFilter)
         self.historyProvider = newHistoryProvider
         self.streaks = StreaksManager(historyProvider: newHistoryProvider, frequency: target.freq)
         self.version = 0
         
         NotificationCenter.default.addObserver(self,
-            selector: #selector(update),
-            name: .WorkoutHistoryChanged,
-            object: nil
+                                               selector: #selector(update),
+                                               name: .WorkoutHistoryChanged,
+                                               object: nil
         )
         NotificationCenter.default.addObserver(self,
-            selector: #selector(update),
-            name: .NSCalendarDayChanged,
-            object: nil
+                                               selector: #selector(update),
+                                               name: .NSCalendarDayChanged,
+                                               object: nil
         )
     }
     

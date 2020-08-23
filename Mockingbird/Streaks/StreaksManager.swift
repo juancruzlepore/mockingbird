@@ -11,7 +11,6 @@ import Combine
 import os.log
 
 class StreaksManager: ObservableObject {
-    let willChange = ObservableObjectPublisher()
 
     init(historyProvider: HistoryProvider, frequency: Frequency) {
         self.historyProvider = historyProvider

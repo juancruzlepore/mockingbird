@@ -9,7 +9,11 @@
 import Foundation
 import SwiftUI
 
-final class DaySeries: Identifiable {
+final class DaySeries: Identifiable, SeriesGroup {
+    var allSeries: [Series] {
+        self.series.flatMap({ $0.allSeries })
+    }
+    
     private static let dateFormat = "MMM dd, yyyy"
 
     private let dateFormatterPrint: DateFormatter
@@ -17,7 +21,7 @@ final class DaySeries: Identifiable {
     public let id: Int
     public let date: Date
     
-    private var seriesMap: [WorkOut: SeriesList]
+    private var seriesMap: [Workout: SeriesList]
     public var series: [SeriesList] {
         get {
             ([SeriesList])(seriesMap.values)
@@ -47,7 +51,8 @@ final class DaySeries: Identifiable {
         self.dateFormatterPrint.dateFormat = DaySeries.dateFormat
     }
     
-    public func addSeries(series newSeries: Series){
-        seriesMap[newSeries.type] = seriesMap[newSeries.type, default: SeriesList()].addSeries(series: newSeries)
+    public func addSeries(series newSeries: Series) -> DaySeries {
+        seriesMap[newSeries.workout] = seriesMap[newSeries.workout, default: SeriesList()].addSeries(series: newSeries)
+        return self
     }
 }

@@ -19,7 +19,7 @@ struct AddSeriesView: View {
     @State var reps = repsDefault
     @State var selectedWorkout = 1
     @State var lastRepsAdded: Int? = nil
-    @ObservedObject var wom: WorkOutsManager
+    @ObservedObject var wom: WorkoutsManager
     @ObservedObject var target: TargetHandler
     
     private func addToReps(amount: Int){
@@ -30,13 +30,13 @@ struct AddSeriesView: View {
         VStack{
             Text("Add workout").font(Font.title)
             Picker(selection: $selectedWorkout, label: Text("Workout")) {
-                ForEach(self.wom.frequentWorkOutsList.filter({target.workouts.contains($0)})) { (w: WorkOut) in
+                ForEach(self.wom.frequentWorkOutsList.filter({target.workouts.contains($0)})) { (w: Workout) in
                     Text(w.name).tag(w.id)
                 }
                 if(!self.wom.frequentWorkOutsList.isEmpty){
                     Text("--separator--").disabled(true)
                 }
-                ForEach(self.wom.infrequentWorkOutsList.filter({target.workouts.contains($0)})) { (w: WorkOut) in
+                ForEach(self.wom.infrequentWorkOutsList.filter({target.workouts.contains($0)})) { (w: Workout) in
                     Text(w.name).tag(w.id)
                 }
             }
@@ -61,18 +61,18 @@ struct AddSeriesView: View {
                 }
             }
             Button(action: {
-                self.wom.addSeries(series: Series(type: WorkOutDefinitions.getById(ID: self.selectedWorkout)!, reps: self.reps, date: DateUtils.today()))
+                self.wom.addSeries(series: Series(type: WorkoutDefinitions.getById(ID: self.selectedWorkout)!, reps: self.reps, date: DateUtils.today()))
                 self.lastRepsAdded = self.reps
                 self.reps = AddSeriesView.repsDefault
             }) {
                 if (self.mostRecentDay != nil && self.mostRecentDay!.date == DateUtils.today()){
                     Text(String(format: " Add (today → %.1f) ", mostRecentDay!.score + FilteredSeries(
-                        base: Series(type: WorkOutDefinitions.getById(ID: self.selectedWorkout)!, reps: self.reps, date: DateUtils.today()),
+                        base: Series(type: WorkoutDefinitions.getById(ID: self.selectedWorkout)!, reps: self.reps, date: DateUtils.today()),
                         filter: target.target.muscleFilter
                     ).score))
                 } else {
                     Text(String(format: " Add (today → %.1f) ", FilteredSeries(
-                        base: Series(type: WorkOutDefinitions.getById(ID: self.selectedWorkout)!, reps: self.reps, date: DateUtils.today()),
+                        base: Series(type: WorkoutDefinitions.getById(ID: self.selectedWorkout)!, reps: self.reps, date: DateUtils.today()),
                         filter: target.target.muscleFilter
                     ).score))
                 }

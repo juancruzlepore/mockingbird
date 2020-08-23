@@ -27,6 +27,12 @@ extension HistoryProvider {
         }
         return daysOrederedDec
     }
+    
+    func getHistoryByDay(from start: Date) -> [DaySeries] {
+        return self.historyByDay.filter {
+            $0.date >= start
+        }
+    }
 
 }
 
