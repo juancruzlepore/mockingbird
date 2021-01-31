@@ -11,6 +11,7 @@ import SwiftUI
 struct AddWorkoutScreenView: View {
     
     @State var selectedMuscles: [MuscleGroup] = []
+    @ObservedObject var target = TargetHandler.defaultTarget
     
     var body: some View {
         GeometryReader { geometry in
@@ -32,13 +33,12 @@ struct AddWorkoutScreenView: View {
                 VStack {
                     NewSeriesView().padding(.all, 10).environmentObject(WorkoutsManager.instance)
                     HistorySingleDayView(
-                        day: self.todayDaySeries ?? DaySeries(date: Date()))
+                        day: self.todayDaySeries ?? DaySeries(date: Date()),
+                        compType: ScoreComparisonType.dailyRecommendation
+                    )
                 }.frame(width: geometry.size.width / 3)
                 VStack {
                     WeekTargetView()
-                    Button(action: {Settings.instance.showingView = .base}) {
-                        Text("back")
-                    }.padding(.top, 10)
                 }.padding(.all, 10).frame(width: geometry.size.width / 3)
                 
             }
@@ -46,7 +46,7 @@ struct AddWorkoutScreenView: View {
     }
     
     var todayDaySeries: DaySeries? {
-        TargetHandler.defaultTarget
+        self.target
             .historyProvider
             .historyByDay
             .first(

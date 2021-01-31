@@ -9,7 +9,7 @@
 import SwiftUI
 
 enum ShowingView {
-    case base, addWorkout;
+    case history, addWorkout, workoutsGallery;
 }
 
 struct ContentView : View {
@@ -22,26 +22,19 @@ struct ContentView : View {
     var body: some View {
         ZStack(alignment: .topTrailing) {
             ZStack(alignment: .topTrailing) {
-                Button(action: { Settings.instance.toggleShowSettings() }) {
-                    Text("Settings")
+                ZStack(alignment: .topTrailing) {
+                    ControlBarView()
+                    Spacer()
                 }
-                Spacer()
-            }
-            VStack{
-                if (settings.showingView == .base){
-                    VStack {
-                        Picker(selection: $selectedTarget, label: Text("Target: ")) {
-                            ForEach(targets) {
-                                Text($0.name).tag($0.id)
-                            }
-                        }.padding(30)
-                        BaseView(target: TargetHandler(target: targets.filter({$0.id == selectedTarget}).first!)).frame(height: 600)
+                VStack{
+                    if (settings.showingView == .history){
+                        BaseView(target: TargetHandler.defaultTarget).frame(height: 600)
+                    }
+                    if (settings.showingView == .addWorkout) {
+                        AddWorkoutScreenView()
                     }
                 }
-                if (settings.showingView == .addWorkout) {
-                    AddWorkoutScreenView()
-                }
-            }
+            }.blur(radius: self.settings.showingSettings ? 6.0 : 0.0)
             if (self.settings.showingSettings) {
                 ZStack(alignment: .center) {
                     Spacer()
@@ -63,10 +56,6 @@ struct BaseView: View {
                 .padding(EdgeInsets(top: 0.0, leading: 1.0, bottom: 0.0, trailing: 2.0))
             VStack{
                 StreaksView(streaks: target.streaks)
-                BigButton(buttonText: Text("Start workout"))
-                    .onTapGesture {
-                        Settings.instance.showingView = .addWorkout
-                }.padding(.all, 35)
             }.padding(EdgeInsets(top: 0.0, leading: 1.0, bottom: 0.0, trailing: 20.0))
         }
     }

@@ -28,7 +28,11 @@ class TargetHandler: ObservableObject {
     func historyProviderFor(week: Int) -> HistoryProvider {
         return FilteredHistoryProvider(
             workoutFilter: target.workoutFilter,
-            dateInterval: (target.freq as! FrequencyWithCalendarPeriod).getPeriodIntervalFor(week: week))
+            dateInterval: target.freq.getPeriodIntervalFor(week: week))
+    }
+    
+    func daysLeftThisPeriod(includingToday: Bool) -> Int {
+        return self.target.freq.daysLeftThisPeriod(includingToday: includingToday)
     }
     
     init(target: Target){

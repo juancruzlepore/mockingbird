@@ -19,4 +19,8 @@ class FilteredSeries: Series {
         self.filter = filter
         super.init(type: base.workout, reps: base.repetitions, date: base.date)
     }
+    
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
+    }
 }

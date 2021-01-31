@@ -10,9 +10,15 @@ import SwiftUI
 
 struct SmallButton: View {
     let buttonText: Text
+    var forceDisabledStyle: Bool = false
+    
     private let gray: Double = 65
     private let hoveredGray: Double = 69
     private let disabledGray: Double = 100
+    
+    private var showEnabledStyle: Bool {
+        self.isEnabled && !self.forceDisabledStyle
+    }
     
     private var hoveredBackground: Color {
         grayFromDouble(value: hoveredGray)
@@ -44,19 +50,18 @@ struct SmallButton: View {
     @Environment(\.isEnabled) private var isEnabled: Bool
     
     var body: some View {
-        buttonText.foregroundColor(isEnabled ? Color.white : normalBackground)
+        buttonText.foregroundColor(Color.white)
             .padding(.vertical, 5).padding(.horizontal, 10)
-            .background(isEnabled ? (hovered
+            .background(showEnabledStyle ? (hovered
                 ? hoveredBackground
                 : normalBackground) : disabledBackground)
             .overlay(
                 RoundedRectangle(cornerRadius: 7)
                     .trim()
                     .stroke(
-                        isEnabled ?
-                            (hovered
-                                ? hoveredBorder
-                                : normalBorder) : disabledBackground,
+                        hovered
+                            ? hoveredBorder
+                            : (showEnabledStyle ? normalBorder : disabledBackground),
                         lineWidth: 2)
                     .onHover(perform: { isHovered in
                         self.hovered = isHovered

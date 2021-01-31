@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "EasyStash",
+        "repositoryURL": "https://github.com/onmyway133/EasyStash",
+        "state": {
+          "branch": "master",
+          "revision": "6181522af86b485ac925bbbec6fd549d4ea45e07",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

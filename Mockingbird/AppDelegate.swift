@@ -26,15 +26,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to initialize your application
         os_log("Application Did Finish Launching.")
         let wom = WorkoutsManager.instance
-        wom.setPersistence(persistence: CsvPersistence()).update()
+        wom.setPersistence(persistence: EasyStashPersistence()).update()
 
         var options = Options()
         options.folder = "Users"
         let storage = try! Storage(options: options)
+        
         if let settings = try? storage.load(forKey: "settings", as: Settings.self) {
-            Settings.instance.addTargetV2(target: settings.targetV2)
+            _ = Settings.instance.addTargetV2(target: settings.targetV2)
         } else {
-            Settings.instance.addTargetV2(target: TargetV2(targetByMuscle: [
+            _ = Settings.instance.addTargetV2(target: TargetV2(targetByMuscle: [
                             .ABS: 150,
                             .ARMS: 150,
                             .BACK: 200,

@@ -35,47 +35,53 @@ extension Data {
     }
 }
 
-class CsvPersistence: Persistence {
+class CsvPersistence {
 
-    let workOutHistoryFile = getDocumentsDirectory().appendingPathComponent("workouts.txt")
-    let workOutsDescriptionsFile = getDocumentsDirectory().appendingPathComponent("workoutsDescriptions.txt")
+    let workoutHistoryFile = getDocumentsDirectory().appendingPathComponent("workouts.txt")
+    let workoutsDescriptionsFile = getDocumentsDirectory().appendingPathComponent("workoutsDescriptions.txt")
         
     
     init() {
-        let fileExists: Bool = self.fileExists(path: workOutHistoryFile.path)
+        let fileExists: Bool = self.fileExists(path: workoutHistoryFile.path)
         if(!fileExists){
             let creationSuccess: Bool =
-                FileManager.default.createFile(atPath: workOutHistoryFile.path, contents: nil)
+                FileManager.default.createFile(atPath: workoutHistoryFile.path, contents: nil)
             os_log("File not found, but created %d", creationSuccess)
         }
     }
-//    func getWorkOutsDescriptions() -> [WorkOut] {
-//        do {
-//            let history = try String(contentsOf: workOutHistoryFile)
-//            let lines = history.components(separatedBy: "\n")
-//            var workOutsList: [WorkOut] = []
-//            lines.forEach {
-//                workOutsList.append(WorkOut(line: $0))
-//            }
-//            return workOutsList
-//        } catch {
-//            os_log("Error: %s", error.localizedDescription)
-//            os_log("Error reading workouts descriptions.")
-//            return []
-//        }
-//    }
     
-    func getWorkOutHistory() -> [String] {
+    private func parseSeriesLine(seriesLine: String) -> (name: String, repsString: String, dateString: String) {
+        let parts = seriesLine.components(separatedBy: ",").map({ $0.trim() })
+        return (parts[0], parts[1], parts[2])
+    }
+    
+    func getWorkoutHistory() -> [Series] {
         do {
-            let history = try String(contentsOf: workOutHistoryFile)
+            let history = try String(contentsOf: workoutHistoryFile)
             os_log("Workout history found")
             let lines = history.components(separatedBy: "\n")
             os_log("Workout history contains %d lines", lines.count)
             os_log("Workout history size: %d", lines.count)
-            return lines
+            
+            var series = [Series]()
+            lines.forEach { seriesLine in
+                if(seriesLine==""){
+                    os_log("History line is nil")
+                    return
+                }
+                let (name, repsString, dateString) = parseSeriesLine(seriesLine: seriesLine)
+                let currentWorkout = WorkoutsManager.instance.workoutsMap[name]!
+                let date = DateUtils.getDate(dateString: dateString)
+                if(date == nil){
+                    os_log("error parsing series date: %s", dateString)
+                    return
+                }
+                series.append(Series(type: currentWorkout, reps: Int(repsString) ?? 0, date: date!))
+            }
+            return series
         } catch {
             os_log("Error: %s", error.localizedDescription)
-            os_log("File path: %s", workOutHistoryFile.absoluteString)
+            os_log("File path: %s", workoutHistoryFile.absoluteString)
             os_log("Error reading workout history.")
             return []
         }
@@ -84,9 +90,9 @@ class CsvPersistence: Persistence {
     func addSeriesToHistory(series: String) {
         let line = series + "\n"
         do {
-            try line.appendToURL(fileURL: self.workOutHistoryFile)
+            try line.appendToURL(fileURL: self.workoutHistoryFile)
         } catch {
-            os_log("Write failed to %s.", workOutHistoryFile.absoluteString)
+            os_log("Write failed to %s.", workoutHistoryFile.absoluteString)
         }
         
     }
@@ -94,12 +100,12 @@ class CsvPersistence: Persistence {
     func testWrite() -> Bool {
         let str = "Super long string here"
         do {
-            try str.write(to: workOutHistoryFile, atomically: true, encoding: String.Encoding.utf8)
-            os_log("Write succeded to %s.", workOutHistoryFile.absoluteString)
+            try str.write(to: workoutHistoryFile, atomically: true, encoding: String.Encoding.utf8)
+            os_log("Write succeded to %s.", workoutHistoryFile.absoluteString)
             return true
         } catch {
             // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
-            os_log("Write failed to %s.", workOutHistoryFile.absoluteString)
+            os_log("Write failed to %s.", workoutHistoryFile.absoluteString)
             return false
         }
     }

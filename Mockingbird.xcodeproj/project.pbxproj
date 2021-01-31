@@ -66,6 +66,12 @@
 		65B951D124E5348F00A8BFB8 /* SmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B951D024E5348F00A8BFB8 /* SmallButton.swift */; };
 		65B951D324E5BD7E00A8BFB8 /* ScoresProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B951D224E5BD7E00A8BFB8 /* ScoresProvider.swift */; };
 		65B951D524E5BE7B00A8BFB8 /* MultiMuscleScoreViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B951D424E5BE7B00A8BFB8 /* MultiMuscleScoreViewV2.swift */; };
+		65E4CC2025A9C6AD0083609C /* DependenciesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E4CC1F25A9C6AD0083609C /* DependenciesManager.swift */; };
+		65E4CC2425A9D5370083609C /* EasyStashPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E4CC2325A9D5370083609C /* EasyStashPersistence.swift */; };
+		65E4CC2825A9D64D0083609C /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E4CC2725A9D64D0083609C /* PersistenceManager.swift */; };
+		65E4CC7125B33A4E0083609C /* ControlBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E4CC7025B33A4E0083609C /* ControlBarView.swift */; };
+		65E4CC7525B342EB0083609C /* WorkoutsGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E4CC7425B342EB0083609C /* WorkoutsGalleryView.swift */; };
+		65E4CC7925B343110083609C /* WorkoutsGalleryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E4CC7825B343110083609C /* WorkoutsGalleryCardView.swift */; };
 		65E4F6F724ED93CE0059803D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E4F6F624ED93CE0059803D /* SettingsView.swift */; };
 		65F5DEDE24CCC464003E1C37 /* IndicatorPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F5DED624CCC464003E1C37 /* IndicatorPoint.swift */; };
 		65F5DEDF24CCC464003E1C37 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F5DED724CCC464003E1C37 /* LineView.swift */; };
@@ -154,6 +160,12 @@
 		65B951D024E5348F00A8BFB8 /* SmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallButton.swift; sourceTree = "<group>"; };
 		65B951D224E5BD7E00A8BFB8 /* ScoresProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresProvider.swift; sourceTree = "<group>"; };
 		65B951D424E5BE7B00A8BFB8 /* MultiMuscleScoreViewV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiMuscleScoreViewV2.swift; sourceTree = "<group>"; };
+		65E4CC1F25A9C6AD0083609C /* DependenciesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependenciesManager.swift; sourceTree = "<group>"; };
+		65E4CC2325A9D5370083609C /* EasyStashPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyStashPersistence.swift; sourceTree = "<group>"; };
+		65E4CC2725A9D64D0083609C /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		65E4CC7025B33A4E0083609C /* ControlBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBarView.swift; sourceTree = "<group>"; };
+		65E4CC7425B342EB0083609C /* WorkoutsGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsGalleryView.swift; sourceTree = "<group>"; };
+		65E4CC7825B343110083609C /* WorkoutsGalleryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsGalleryCardView.swift; sourceTree = "<group>"; };
 		65E4F6F624ED93CE0059803D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		65F5DED624CCC464003E1C37 /* IndicatorPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorPoint.swift; sourceTree = "<group>"; };
 		65F5DED724CCC464003E1C37 /* LineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
@@ -239,6 +251,9 @@
 				65E4F6F524ED93BB0059803D /* Settings */,
 				655E0F8924D7629B0067612F /* AddWorkoutScreen */,
 				658F971124CF6B540028E97C /* TodayScoreView.swift */,
+				65E4CC7425B342EB0083609C /* WorkoutsGalleryView.swift */,
+				65E4CC7825B343110083609C /* WorkoutsGalleryCardView.swift */,
+				65E4CC7025B33A4E0083609C /* ControlBarView.swift */,
 				654FBC2524D6D2A500BECDDC /* HistoryView.swift */,
 				658F971324CF78860028E97C /* DayView.swift */,
 				655E0F9424DC85D00067612F /* Aux */,
@@ -336,16 +351,15 @@
 				6542ABA522EDCBE400EA910E /* Time */,
 				653BD57522D1303A00FBFB3A /* WorkOuts */,
 				653C03DB22CC0067000F507A /* Series */,
-				656B493922CA9FE8001A5B0A /* Persistence.swift */,
+				65E4CC1C25A9C6820083609C /* Persistence */,
 				653BD56F22D1020A00FBFB3A /* Streaks */,
-				656B493B22CAA007001A5B0A /* CsvPersistence.swift */,
 				653BD57422D1025C00FBFB3A /* Settings */,
 				6580ED7B22BFDFD7005D4E71 /* Info.plist */,
 				6542AB9922EA545C00EA910E /* Utils.swift */,
 				658F971524CF78AF0028E97C /* TestUtils.swift */,
+				65E4CC1F25A9C6AD0083609C /* DependenciesManager.swift */,
 				658FEEB924E952F4002B566A /* UsageStats.swift */,
-				65B951D224E5BD7E00A8BFB8 /* ScoresProvider.swift */,
-				6532F8D722F6ED710045ABCF /* HistoryProvider.swift */,
+				65E4CC1925A9C6690083609C /* Providers */,
 				6580ED7C22BFDFD7005D4E71 /* Mockingbird.entitlements */,
 				6580ED7022BFDFD4005D4E71 /* Mockingbird.xcdatamodeld */,
 				6580ED7522BFDFD7005D4E71 /* Preview Content */,
@@ -369,6 +383,26 @@
 				6580ED8722BFDFD7005D4E71 /* Info.plist */,
 			);
 			path = MockingbirdTests;
+			sourceTree = "<group>";
+		};
+		65E4CC1925A9C6690083609C /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				65B951D224E5BD7E00A8BFB8 /* ScoresProvider.swift */,
+				6532F8D722F6ED710045ABCF /* HistoryProvider.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		65E4CC1C25A9C6820083609C /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				656B493922CA9FE8001A5B0A /* Persistence.swift */,
+				65E4CC2725A9D64D0083609C /* PersistenceManager.swift */,
+				656B493B22CAA007001A5B0A /* CsvPersistence.swift */,
+				65E4CC2325A9D5370083609C /* EasyStashPersistence.swift */,
+			);
+			path = Persistence;
 			sourceTree = "<group>";
 		};
 		65E4F6F524ED93BB0059803D /* Settings */ = {
@@ -450,7 +484,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1160;
+				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = "Juan Cruz Lepore";
 				TargetAttributes = {
 					6580ED6822BFDFD4005D4E71 = {
@@ -517,13 +551,17 @@
 				658FEEBA24E952F4002B566A /* UsageStats.swift in Sources */,
 				655E0F9324D962400067612F /* NewSeries.swift in Sources */,
 				65B951D524E5BE7B00A8BFB8 /* MultiMuscleScoreViewV2.swift in Sources */,
+				65E4CC7125B33A4E0083609C /* ControlBarView.swift in Sources */,
 				6532F8D422F633370045ABCF /* Target.swift in Sources */,
 				65F5DEE024CCC464003E1C37 /* Legend.swift in Sources */,
+				65E4CC7525B342EB0083609C /* WorkoutsGalleryView.swift in Sources */,
 				658FEEB824E94BB0002B566A /* RoundedCorner.swift in Sources */,
 				6542ABA722EDCBFC00EA910E /* Day.swift in Sources */,
 				6589FA1624D6F31E00B7DB2B /* AddWorkoutScreenView.swift in Sources */,
 				658F971424CF78860028E97C /* DayView.swift in Sources */,
 				65F5DEE224CCC464003E1C37 /* MagnifierRect.swift in Sources */,
+				65E4CC2025A9C6AD0083609C /* DependenciesManager.swift in Sources */,
+				65E4CC2825A9D64D0083609C /* PersistenceManager.swift in Sources */,
 				655E0F8D24D763180067612F /* WorkoutElementView.swift in Sources */,
 				65B951D124E5348F00A8BFB8 /* SmallButton.swift in Sources */,
 				65F5DEDF24CCC464003E1C37 /* LineView.swift in Sources */,
@@ -561,6 +599,7 @@
 				653BD57322D1024800FBFB3A /* UserSettings.swift in Sources */,
 				655E0F8F24D82B310067612F /* WorkoutList.swift in Sources */,
 				653BD57722D1305B00FBFB3A /* WorkoutDefinitions.swift in Sources */,
+				65E4CC2425A9D5370083609C /* EasyStashPersistence.swift in Sources */,
 				6542AB9D22EC785F00EA910E /* StreaksView.swift in Sources */,
 				65039AFC22F7513800F5499D /* TargetHandler.swift in Sources */,
 				654FBC2424D3691A00BECDDC /* TargetV2.swift in Sources */,
@@ -571,6 +610,7 @@
 				65F5DEE124CCC464003E1C37 /* LineChartView.swift in Sources */,
 				6542AB9A22EA545C00EA910E /* Utils.swift in Sources */,
 				653BD56E22D101FD00FBFB3A /* StreaksManager.swift in Sources */,
+				65E4CC7925B343110083609C /* WorkoutsGalleryCardView.swift in Sources */,
 				6542AB9F22ECC0C200EA910E /* Frequency.swift in Sources */,
 				654FBC2224D2C92E00BECDDC /* SeriesGroup.swift in Sources */,
 			);
@@ -634,6 +674,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -694,6 +735,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
