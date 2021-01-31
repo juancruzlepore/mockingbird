@@ -12,61 +12,72 @@ import os.log
 final class WorkoutDefinitions {
     public static let L_SIT_VAL_IN_PULLUP: Float = 0.3
     public static let descriptions: [Workout] = [
-        newPullWorkout(
+        Workout(
             name: "Pull-up",
-            values: [.BACK:1.0]
+            values: [.BACK:1.0],
+            movementType: .PULL
         ),
-        newPullWorkout(
+        Workout(
             name: "L-sit Pull-up",
             values: [
                 .BACK: 1.2,
                 .ABS: L_SIT_VAL_IN_PULLUP
-            ]
+            ],
+            movementType: .PULL
         ),
-        newPullWorkout(
+        Workout(
             name: "Wide Pull-up",
-            values: [.BACK:1.2]
+            values: [.BACK:1.2],
+            movementType: .PULL
         ),
-        newPullWorkout(
+        Workout(
             name: "L-sit Wide Pull-up",
             values: [
                 .BACK: 1.4,
                 .ABS: L_SIT_VAL_IN_PULLUP
-            ]
+            ],
+            movementType: .PULL
         ),
-        newPullWorkout(
+        Workout(
             name: "Wide Pull-up to Chest",
-            values: [.BACK:2.0]
+            values: [.BACK:2.0],
+            movementType: .PULL
         ),
-        newPullWorkout(
+        Workout(
             name: "Close Pull-up",
-            values: [.BACK:1.35]
+            values: [.BACK:1.35],
+            movementType: .PULL
         ),
-        newPullWorkout(
+        Workout(
             name: "L-sit Close Pull-up",
             values: [
                 .BACK: 1.55,
                 .ABS: L_SIT_VAL_IN_PULLUP
-            ]
+            ],
+            movementType: .PULL
         ),
-        newPullWorkout(
+        Workout(
             name: "Archer Pull-up",
-            values: [.BACK:1.5]
+            values: [.BACK:1.5],
+            movementType: .PULL
         ),
-        newPushWorkout(
+        Workout(
             name: "Push-up",
-            values: [.CHEST:0.75]
+            values: [.CHEST:0.75],
+            movementType: .PUSH
         ),
-        newPushWorkout(
+        Workout(
             name: "Wide Push-up",
             values: [
                 .CHEST:1.1,
                 .SHOULDERS:0.3
-            ]
+            ],
+            movementType: .PUSH
         ),
-        newPushWorkout(
+        Workout(
             name: "Clap Push-up",
-            values: [.CHEST:2.0]
+            values: [.CHEST:2.0],
+            movementType: .PUSH
         ),
         Workout(
             name: "Crunch",
@@ -143,35 +154,41 @@ final class WorkoutDefinitions {
             values: [.LEGS:2.5],
             movementType: .OTHER
         ),
-        newPushWorkout(
+        Workout(
             name: "Archer Push-up",
-            values: [.CHEST:1.6]
+            values: [.CHEST:1.6],
+            movementType: .PUSH
         ),
-        newPushWorkout(
+        Workout(
             name: "Shoulder Push-up",
-            values: [.SHOULDERS:1.4]
+            values: [.SHOULDERS:1.4],
+            movementType: .PUSH
         ),
-        newPushWorkout(
+        Workout(
             name: "Pseudo Planche Push-up",
-            values: [.SHOULDERS:1.5]
+            values: [.SHOULDERS:1.5],
+            movementType: .PUSH
         ),
-        newPushWorkout(
+        Workout(
             name: "Elevated Shoulder Push-up",
-            values: [.SHOULDERS:1.7]
+            values: [.SHOULDERS:1.7],
+            movementType: .PUSH
         ),
-        newPushWorkout(
+        Workout(
             name: "Hindu Push-up",
             values: [
                 .SHOULDERS:2.2,
                 .CHEST:1.4
-            ]
+            ],
+            movementType: .PUSH
         ),
-        newPushWorkout(
+        Workout(
             name: "Dip",
             values: [
                 .ARMS: 2.0,
                 .CHEST:1.0,
-            ]
+            ],
+            movementType: .PUSH
         ),
     ]
     
@@ -188,7 +205,7 @@ final class WorkoutDefinitions {
     }
     
     public static func getById(ID: Int) -> Workout? {
-        os_log("workout id: %d", ID)
+//        os_log("workout id: %d", ID)
         for w in descriptions {
             if w.id == ID {
                 return w
@@ -198,7 +215,7 @@ final class WorkoutDefinitions {
     }
     
     public static func getByName(name: String) -> Workout? {
-        os_log("workout name: %d", name)
+//        os_log("workout name: %d", name)
         for w in descriptions {
             if w.name == name {
                 return w

@@ -30,13 +30,13 @@ struct AddSeriesView: View {
         VStack{
             Text("Add workout").font(Font.title)
             Picker(selection: $selectedWorkout, label: Text("Workout")) {
-                ForEach(self.wom.frequentWorkOutsList.filter({target.workouts.contains($0)})) { (w: Workout) in
+                ForEach(self.wom.frequentWorkoutsList.filter({target.workouts.contains($0)})) { (w: Workout) in
                     Text(w.name).tag(w.id)
                 }
-                if(!self.wom.frequentWorkOutsList.isEmpty){
+                if(!self.wom.frequentWorkoutsList.isEmpty){
                     Text("--separator--").disabled(true)
                 }
-                ForEach(self.wom.infrequentWorkOutsList.filter({target.workouts.contains($0)})) { (w: Workout) in
+                ForEach(self.wom.infrequentWorkoutsList.filter({target.workouts.contains($0)})) { (w: Workout) in
                     Text(w.name).tag(w.id)
                 }
             }

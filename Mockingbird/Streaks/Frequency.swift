@@ -70,7 +70,7 @@ class FrequencyWithCalendarPeriod: Frequency {
     let periodStart: Date
     
     init(period: Period, timesInPeriod: Int, periodStart: Date){
-        self.periodStart = periodStart
+        self.periodStart = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: periodStart)!
         super.init(period: period, timesInPeriod: timesInPeriod, calendarPeriod: true)
     }
     
@@ -127,6 +127,11 @@ class FrequencyWithCalendarPeriod: Frequency {
         return DateInterval(
             start: getPeriodStartFor(week: week),
             end: getPeriodEndFor(week: week))
+    }
+    
+    func daysLeftThisPeriod(includingToday: Bool) -> Int {
+        let daysLeft = Calendar.current.dateComponents([.day], from: Date(), to: currentPeriodEnd).day!
+        return daysLeft + (includingToday ? 1 : 0)
     }
 }
 

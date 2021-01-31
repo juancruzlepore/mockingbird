@@ -27,7 +27,12 @@ struct WorkoutFilter {
     }
 }
 
-class Workout: Hashable, Identifiable {
+struct Dependency: Codable {
+    let workoutName: String
+    let reps: Int
+}
+
+class Workout: Hashable, Identifiable, Codable {
     static func == (lhs: Workout, rhs: Workout) -> Bool {
         lhs.name == rhs.name
     }
@@ -51,12 +56,20 @@ class Workout: Hashable, Identifiable {
     
     public let values: [MuscleGroup:Float]
     public let movementType: MovementType
+    public let dependencies: [Dependency]
+    public var mainMuscle: MuscleGroup {
+        self.values.max(by: {a, b in a.value < b.value})?.key ?? .ABS
+    }
     
-    init(name: String, values: [MuscleGroup:Float], movementType: MovementType) {
+    init(name: String,
+         values: [MuscleGroup:Float],
+         movementType: MovementType,
+         dependencies: [Dependency] = []) {
         self.name = name
         self.values = values
         self.movementType = movementType
         self.id = Workout.nextId()
+        self.dependencies = dependencies
     }
     
     public func getValues(muscleFilter: MuscleFilter) -> Float {

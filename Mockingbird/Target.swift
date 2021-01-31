@@ -22,7 +22,7 @@ class Target: ObservableObject, Identifiable {
     let willChange = ObservableObjectPublisher()
     @Published var version: Int
     
-    let freq: Frequency
+    let freq: FrequencyWithCalendarPeriod
     let name: String
     let seriesFilter: SeriesFilter
     let muscleFilter: MuscleFilter
@@ -30,7 +30,7 @@ class Target: ObservableObject, Identifiable {
         WorkoutFilter(seriesFilter: seriesFilter, muscleFilter: muscleFilter)
     }
     
-    init(frequency: Frequency,
+    init(frequency: FrequencyWithCalendarPeriod,
          name: String,
          seriesFilter: @escaping SeriesFilter = { _ in true },
          muscleFilter: @escaping MuscleFilter = { _ in true }) {

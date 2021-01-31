@@ -59,7 +59,7 @@ class Utils {
             if (historyMap[s.date] == nil){
                 historyMap[s.date] = DaySeries(date: s.date)
             }
-            historyMap[s.date]!.addSeries(series: s)
+            _ = historyMap[s.date]!.addSeries(series: s)
         }
         return historyMap
     }

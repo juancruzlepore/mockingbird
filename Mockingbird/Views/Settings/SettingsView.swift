@@ -11,19 +11,21 @@ import EasyStash
 import os.log
 
 struct SettingsView: View {
-    var weeklyGoalSettingsView = WeeklyGoalSettingsView()
+    
+    private func grayColor(val: Double) -> Color {
+        return Color(red: val, green: val, blue: val)
+    }
     
     var body: some View {
         ZStack(alignment: .center) {
-            RoundedRectangle(cornerRadius: 40)
+            RoundedRectangle(cornerRadius: 10)
                             .trim()
-                            .cornerRadius(20)
-                .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
-//                .background(Color.black)
+                            .cornerRadius(10)
+                .foregroundColor(grayColor(val: 0.1))
                 .opacity(1.0)
             VStack {
                 Text("Settings").font(.largeTitle)
-                self.weeklyGoalSettingsView
+                WeeklyGoalSettingsView()
                 Button(action: {
                     var options = Options()
                     options.folder = "Users"
@@ -61,10 +63,10 @@ struct WeeklyGoalSingleMuscleSettingsView: View {
     
     var body: some View {
         HStack {
-            Text("\(self.muscle.rawValue): ")
+            Text("\(self.muscle.rawValue)").frame(width: 70, alignment: .leading)
             TextField("", text: Binding<String>(
                 get: {
-                    String(self.settings.getTarget(forMuscle: self.muscle) ?? 0)
+                    String(Int(self.settings.getTarget(forMuscle: self.muscle) ?? 0))
             }, set: {
                 self.settings.updateTarget(Float($0) ?? 0, forMuscle: self.muscle)
             }))

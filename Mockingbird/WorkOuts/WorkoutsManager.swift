@@ -16,7 +16,7 @@ class WorkoutsManager: ObservableObject, HistoryProvider {
         
     public static let instance = WorkoutsManager()
     
-    private static func genWorkOutsMap() -> [String: Workout] {
+    private static func genWorkoutsMap() -> [String: Workout] {
         let map = WorkoutDefinitions.descriptions.reduce(into: [String: Workout]()) {
             $0[$1.name] = $1
         }
@@ -25,23 +25,23 @@ class WorkoutsManager: ObservableObject, HistoryProvider {
     }
     
     private init(){
-        self.workOutsMap = WorkoutsManager.genWorkOutsMap()
+        self.workoutsMap = WorkoutsManager.genWorkoutsMap()
         self.history = []
-        self.frequentWorkOuts = SortedRecentSet(maxSize: 10)
+        self.frequentWorkouts = SortedRecentSet(maxSize: 10)
     }
     
 //    lazy var streaks: StreaksManager = StreaksManager(historyProvider: self) // MARK: reference loop?
     var persistence: Persistence?
-    var workOutsMap: [String: Workout]
-    var workOutsList: [Workout] {
-        ([Workout])(workOutsMap.values)
+    var workoutsMap: [String: Workout]
+    var workoutsList: [Workout] {
+        ([Workout])(workoutsMap.values)
     }
-    var frequentWorkOuts: SortedRecentSet<Workout>
-    var frequentWorkOutsList: [Workout]{
-        frequentWorkOuts.getSortedList()
+    var frequentWorkouts: SortedRecentSet<Workout>
+    var frequentWorkoutsList: [Workout]{
+        frequentWorkouts.getSortedList()
     }
-    var infrequentWorkOutsList: [Workout] {
-        Array(Set(workOutsList).symmetricDifference(Set(frequentWorkOutsList)))
+    var infrequentWorkoutsList: [Workout] {
+        Array(Set(workoutsList).symmetricDifference(Set(frequentWorkoutsList)))
     }
     
     @Published var history: [Series]
@@ -55,46 +55,45 @@ class WorkoutsManager: ObservableObject, HistoryProvider {
         return self
     }
     
+    private func parseSeriesLine(seriesLine: String) -> (name: String, repsString: String, dateString: String) {
+        let parts = seriesLine.components(separatedBy: ",").map({ $0.trim() })
+        return (parts[0], parts[1], parts[2])
+    }
+    
     public func update() {
         assert(persistence != nil)
         if(persistence == nil){
             return
         }
-        persistence!.getWorkOutHistory().forEach { series in
-            if(series==""){
-                os_log("History line is nil")
-                return 
-            }
-            let parts = series.components(separatedBy: ",").map({ $0.trim() })
-            let currentWorkOut = workOutsMap[parts[0]]!
-            let date = DateUtils.getDate(dateString: parts[2])
-            if(date == nil){
-                os_log("error parsing series date: %s", parts[2])
-                return
-            }
-            history.append(Series(type: currentWorkOut, reps: Int(parts[1]) ?? 0, date: date!))
+        persistence!.getWorkoutHistory().forEach { series in
+            history.append(series)
         }
-        if(frequentWorkOuts.isEmpty()){
+        
+        if(frequentWorkouts.isEmpty()){
             let periodLengthToLookBack = Period.FORTNIGHT
             let lastWeekSeries = self.getHistoryByDay(from: DateUtils.today() - periodLengthToLookBack,
                 to: DateUtils.tomorrow(), ignoringToday: false, orderedInc: true)
                 .flatMap({$0.series.flatMap({$0.series})})
             for s in lastWeekSeries {
-                frequentWorkOuts.insert(elem: s.workout)
+                frequentWorkouts.insert(elem: s.workout)
             }
         }
         return
     }
         
     public func addSeries(series: Series) {
-        persistence?.addSeriesToHistory(series: series.toString())
         history.append(series)
         workoutHistoryDidChange();
-        frequentWorkOuts.insert(elem: series.workout)
+        frequentWorkouts.insert(elem: series.workout)
     }
     
     private func workoutHistoryDidChange() {
         self.objectWillChange.send()
         notificationCenter.post(name: .WorkoutHistoryChanged, object: nil)
+        persistence?.saveCurrentWorkoutHistory()
+    }
+    
+    public func getWorkoutFrom(name: String) -> Workout? {
+        return self.workoutsMap[name]
     }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum MovementType: String {
+enum MovementType: String, Codable {
     case PUSH = "Push"
     case PULL = "Pull"
     case ISOMETRIC = "Isometric"

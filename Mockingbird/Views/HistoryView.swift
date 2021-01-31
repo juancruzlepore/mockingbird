@@ -8,6 +8,10 @@
 
 import SwiftUI
 
+enum ScoreComparisonType {
+    case previousDay, dailyRecommendation
+}
+
 struct HistoryView: View {
     @ObservedObject var target: TargetHandler
     @State var weekBeforeCurrent: Int = 0
@@ -33,7 +37,8 @@ struct HistoryView: View {
                 ForEach(historyProvider.historyByDay) { (day: DaySeries) in
                     HistorySingleDayView(
                         historyProvider: self.historyProvider,
-                        day: day
+                        day: day,
+                        compType: .previousDay
                     )
                 }
             }
@@ -58,20 +63,50 @@ struct DayScoreView: View {
 struct HistorySingleDayView: View {
     var historyProvider: HistoryProvider = TargetHandler.defaultTarget.historyProvider
     var day: DaySeries
+    let compType: ScoreComparisonType
     
     var body: some View {
         HStack{
             DayView(daySeries: day)
-            if (day.date == DateUtils.today()) {
-                TodayScoreView(
-                    historyByDay: self.historyProvider.historyByDay,
-                    today: day
-                ).frame(width: 80)
+            if (DateUtils.isToday(date: day.date)) {
+                if (self.compType == .previousDay){
+                    TodayScoreView(
+                        historyByDay: self.historyProvider.historyByDay,
+                        today: day
+                    ).frame(width: 80)
+                } else if (self.compType == ScoreComparisonType.dailyRecommendation) {
+                    VStack {
+                        TodayScoreViewV2(
+                            historyByDay: self.historyProvider.historyByDay,
+                            today: day,
+                            goal: self.todaysGoal
+                        )
+                        Text("days left: \(daysLeft)")
+                    }.frame(width: 80)
+                }
             } else {
                 DayScoreView(score: day.score).frame(width: 80)
             }
             MultiMuscleScoreView(maxScore: 110, scores: day.scorePerMuscle)
         }.padding(EdgeInsets(top: 0.0, leading: 0.0, bottom: 0.0, trailing: 5.0))
+    }
+    
+    var daysLeft: Int {
+        TargetHandler.defaultTarget
+            .daysLeftThisPeriod(includingToday: true)
+    }
+    
+    var todaysGoal: Float {
+        let thisWeekTotal = TargetHandler.defaultTarget
+            .historyProviderFor(week: 0).history.reduce(0.0, {$0 + $1.score})
+        let thisWeekTotalGoal = Settings.instance.targetV2.targetsSum
+        let todaysScore = day.score
+        let thisWeekRemaining = thisWeekTotalGoal - thisWeekTotal + todaysScore
+        let daysPerWeek = 5
+        let idealPerDay = thisWeekTotalGoal / Float(daysPerWeek)
+        let goal = (1...daysLeft).reversed().map({thisWeekRemaining / Float($0)})
+            .first(where: {$0 >= idealPerDay}) ?? thisWeekRemaining
+        return goal
     }
 }
 
@@ -81,7 +116,7 @@ struct WeekTextView: View {
     
     let formatter = DateUtils.instance.dateFormatterShortDayOfWeek
     var freq: FrequencyWithCalendarPeriod {
-        target.target.freq as! FrequencyWithCalendarPeriod
+        target.target.freq
     }
     var startDayString: String {
         let start = freq.getPeriodStartFor(week: weekBeforeCurrent)

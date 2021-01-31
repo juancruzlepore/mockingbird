@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-class Series: Identifiable, SeriesGroup {
+class Series: Identifiable, SeriesGroup, Codable {
     
     var allSeries: [Series] {
         [self]

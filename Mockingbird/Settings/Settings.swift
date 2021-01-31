@@ -10,7 +10,7 @@ import Foundation
 
 class Settings: ObservableObject, Codable {
     
-    @Published var showingView: ShowingView = .base
+    @Published var showingView: ShowingView = .history
     @Published var showingSettings: Bool = false
     
     private static var privateInstance = Settings()
